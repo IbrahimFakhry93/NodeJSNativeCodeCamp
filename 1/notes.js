@@ -55,6 +55,73 @@ console.log(data); //* usage
 
 //*=============================================================================================================================
 
+//! Variables cont in scope lesson 12
+
+//* const variable: variable that can't be changed after initialization
+
+//*=================================================================================================================
+
+//! Declaration using var in different scopes
+
+//~ Example 1:
+
+//* Global Scope
+var data = 5; // Declare a variable 'data' with the value 5 in the global scope.
+var data = 6; // Redeclare the variable 'data' in the global scope (allowed with 'var', but not recommended).
+
+//* Block Scope
+{
+  //* Accessing the variable before declaration in the block scope
+  console.log(data); //* 6
+  var data = 7; // Declare and assign a new value to 'data' in the block scope.
+  console.log(data); // Output: 7 (the reassigned value within the block scope).
+}
+
+//* Function Scope
+function displayData() {
+  //* Accessing the variable before declaration in the function scope
+  console.log(data); //~ Output: undefined (due to variable hoisting).
+  var data = 8; // Declare and assign a new value to 'data' in the function scope.
+  console.log(data); // Output: 8 (the reassigned value within the function scope).
+}
+
+displayData(); // Call the function to demonstrate function-scoped variable behavior.
+console.log(data); // Output: 7 (the value reassigned in the block scope).
+
+//~ Example 2:
+
+var x = 5;
+
+{
+  console.log(x);
+  var x = 6;
+}
+
+console.log(x);
+
+//^ output:
+// 5
+// 6
+
+var a = 3;
+
+function first() {
+  const b = 1;
+
+  console.log(c); //* undefined
+
+  if (true) {
+    var c = 5;
+    console.log(b);
+  }
+
+  console.log(c); //* 5
+}
+
+first();
+
+//*=============================================================================================================================
+
 //! Operators – Arithmetic
 
 //~ x++ post-increment operator:
