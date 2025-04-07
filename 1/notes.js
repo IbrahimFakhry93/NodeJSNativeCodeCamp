@@ -636,3 +636,247 @@ if (isValid && heavyDutyFunction()) {
  *    - Condition Check: `i < 6` (6 < 6 → `false`)
  *    - Since the condition is `false`, the loop terminates.
  */
+//*==============================================
+
+//~ Factorial of a number
+
+//* 5! = 5 × 4 × 3 × 2 × 1 = 120
+const n = 5; //* input
+let fact = 1; //* output variable
+
+//^ Processing
+for (let i = 1; i <= n; i++) {
+  fact *= i; //* fact = fact * i
+}
+
+//console.log(fact); //*output
+
+//^ Processing
+//^ We can start from 2 instead of 1 to save processing time since multiplying by 1 has no effect.
+for (let i = 2; i <= n; i++) {
+  fact *= i; //* fact = fact * i
+}
+
+// console.log(fact); //* Output: The factorial of n
+
+//* starting from 2 eliminates one unnecessary iteration.
+//* This optimization might seem minor but aligns with writing efficient code practices
+
+//*==============================================
+
+//! *** Abdo ****
+
+// Finding prime numbers from 1 to n
+
+//^  Input: Specify the value of n
+//* input = n
+
+//^ Prime number definition:
+//* A prime number is a number that can only be divided by itself and 1
+
+//^ Loop through numbers from 1 to n
+//? for i in range(1, n):
+//^    Loop through numbers from 2 to i to check divisibility
+//?     for j in range(2, i):
+//         if i % j == 0:
+//*            If i is divisible by j, it is not a prime number
+//             print(f"{i} is not a prime number")
+//             break  # Exit the inner loop since i is not prime
+
+//~ Prime numbers from 1 to n
+
+//~ prime numbers between 1 and 10: 2, 3, 5, 7.
+
+// (function () {
+//   const n = 10;
+//   for (let i = 1; i <= n; i++) {
+//     let isPrime = true;
+//     for (let j = 2; j < i; j++) {
+//       if (i % j === 0) {
+//         isPrime = false;
+//           break;
+//       }
+//       if (isPrime) console.log(i);
+//     }
+//   }
+// })();
+
+// (function () {
+//   const n = 10;
+//   for (let i = 2; i <= n; i++) {
+//     let counter = 0; //! my mistake that I didn't put the counter before the second loop, I put outside it gave me wrong
+//     for (let j = 1; j <= i; j++) {
+//       if (i % j === 0) counter++;
+//     }
+//     if (counter === 2) console.log(i);
+//   }
+// })();
+
+//*============================================================================
+
+//~ Ex to make gadwal el darb
+// (function () {
+//   const n = 2;
+
+//   for (let i = 1; i <= 10; i += 2) {
+//     console.log(`${n} * ${i} = ${n * i}`);
+//   }
+// })();
+
+//~ Ex to print only even numbers
+
+// (function () {
+//   for (let i = 1; i <= 10; i++) {
+//     if (i % 2 === 0) console.log(i);
+//   }
+// })();
+
+//? or: use odd condition and use continue keyword
+
+(function () {
+  for (let i = 1; i <= 10; i++) {
+    if (i % 2 === 1) continue;
+    console.log(i);
+  }
+})();
+
+//* break: break the whole loop
+//* continue: break the current iteration and continue the loop
+
+//~ Ex to print only odd numbers
+
+console.log("================================");
+// (function () {
+//   for (let i = 1; i <= 10; i++) {
+//     if (i % 2 === 1) console.log(i);
+//   }
+// })();
+
+//~ ex to show nested loop
+// (function () {
+//   for (let i = 0; i < 5; i++) {
+//     console.log(`i = ${i}`);
+//     for (let j = 0; j < 5; j++) {
+//       console.log(`${j}`);
+//     }
+//     console.log("============");
+//   }
+// })();
+
+//~ ex gadwal el darb for different numbers but with nest loop
+
+// (function () {
+//   for (let i = 1; i <= 10; i++) {
+//     console.log(`i = ${i}`);
+//     for (let j = 1; j <= 10; j++) {
+//       console.log(`${i} * ${j} = ${i * j}`);
+//     }
+//     console.log("============");
+//   }
+// })();
+
+//! ask chatgpt about the completion value
+
+//*============================================================================
+
+//! Lexical Grammar:
+
+//*=================================================
+
+//! 21 – Array 01 – Introduction
+
+// (function () {
+var colors = ["Black", "White", "Grey", 10, "Red", 8, "Green"];
+colors[2] = "Gray";
+console.log(colors[2]);
+console.log(colors.length);
+console.log(colors[colors.length - 1]);
+console.log(colors[3] + colors[5]);
+console.log(colors[3] + colors[4]);
+
+colors.push("Yellow");
+//colors[colors.length] = "Yellow";
+console.log(colors);
+colors.unshift("Blue");
+console.log(colors);
+
+colors.shift();
+// })();
+
+//*=================================================
+//! function
+
+//* declaration function can be called inside its block again recursion
+///* expression function can't apply that
+
+//* hoisting is applied on declaration function
+//* hoisting can't be applied on expression function
+//! if usage before declaration,
+
+//~ example:
+
+(function () {
+  function add(a, b) {
+    let sum = a + b;
+    console.log(sum);
+  }
+
+  console.log(add(2, 5) + add(2, 1)); //* NaN => undefined + undefined = NaN
+  console.log(add(2, 5) < add(2, 1)); //* false
+})();
+
+//? undefined because there is no return value added to the function add above
+
+//~ example: dynamic add function to add any numbers
+
+(function () {
+  //================
+  function add(a, b) {
+    let sum = 0;
+    for (let i = 0; i < arguments.length; i++) {
+      sum += arguments[i];
+    }
+    return sum;
+  }
+
+  console.log(add(2, 3));
+  console.log(add()); //* 5, JS is dynamic , it will work
+  console.log(add());
+
+  //=================
+})();
+//~ example: using rest operator to achieve same as above
+(function () {
+  //================
+  function add(...nums) {
+    let sum = 0;
+    for (let i = 0; i < nums.length; i++) {
+      sum += nums[i];
+    }
+    return sum;
+  }
+
+  console.log(add(2, 3));
+  //=================
+})();
+
+//~ example: using array instead of rest operator
+(function () {
+  //================
+  function add(...nums) {
+    let sum = 0;
+    for (let i = 0; i < nums.length; i++) {
+      sum += nums[i];
+    }
+    return sum;
+  }
+
+  console.log(add([2, 3]));
+  //=================
+})();
+
+//*==================================================
+
+//! object
+
+//* Object is a container of a related data

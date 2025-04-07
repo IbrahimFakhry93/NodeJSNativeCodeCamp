@@ -6,7 +6,7 @@
 //* Entire application is divided into components
 //* Every component is divided into modules
 
-//* Module is a code was developed seperately then it was merged with other code when needed
+//* Module is a code was developed separately then it was merged with other code when needed
 
 //? For example
 //* Orders component

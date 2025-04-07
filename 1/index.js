@@ -198,3 +198,34 @@ console.log("================================");
 // })();
 
 //! ask chatgpt about the completion value
+
+//*============================================================================
+console.log("###############");
+function add(a, b) {
+  let sum = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+  return sum;
+}
+
+// console.log(add(2, 3));
+//*======================
+
+//~ example: using rest operator
+(function () {
+  //================
+  function add(...nums) {
+    let sum = 0;
+    for (let i = 0; i < nums.length; i++) {
+      sum += nums[i];
+    }
+    return sum;
+  }
+
+  console.log(add(2, 3));
+  console.log(add()); //* 5, JS is dynamic , it will work
+  console.log(add());
+
+  //=================
+})();
