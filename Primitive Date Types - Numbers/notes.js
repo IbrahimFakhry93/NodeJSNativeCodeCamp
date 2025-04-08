@@ -1,41 +1,26 @@
-//! Common Modules:
+//! Numbers
 
-//* Modules is a method to organize the code in the application
-//* Divide the code into files
+//* Numbers in JS is an application of IEEE S754
 
-//* Entire application is divided into components
-//* Every component is divided into modules
+//* JS is applied double precision 64 bit binary
 
-//* Module is a code was developed separately then it was merged with other code when needed
+//* everytime we increase the decimal part, the precsion of a number increases
 
-//? For example
-//* Orders component
-//* order works with database
-//* Module is working with database and then was merged with orders component
+//* precision in computer is measured by bit
 
-//* Module can contain one file or number of files.
+//* single precision equals 32 bit
+//* double precision equals 32 * 2 = 64
 
-//* Export process occurs in the module
+//* maximum precison needed in like fintech is 5 decimals
 
-//* Import process occurs in the file which module is used
+//* 7 decimals is much
 
-//*==================================
+//* in c#:
+//* there is data type is float which 32 bit
+//* double is 64bit
+//* decimal is 128 bit
 
-//~ __filename
-//* the name of the current script we work on, ex. index.js
+//* in ieee 754 std it converts a decimal number to binary by
+//* dividing it into 3 parts:sign , exponent,mantissa
 
-//~ __dirname
-//* path of the directory on the operating system
-
-//~ this
-//* this keyword refers to Module Object in Node JS
-
-//~ require:
-//* is used to do import for any file we are working on
-
-//~ exports:
-//* It is an empty object in Module object
-
-//*===========================
-
-//* create file (ourMath.js)
+//*=========================================================
