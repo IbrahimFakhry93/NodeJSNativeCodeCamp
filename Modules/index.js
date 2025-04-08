@@ -12,5 +12,8 @@ console.log("-------------------------------------------------------");
 
 //*===================================
 
-let math = require("./ourMath");
-console.log(math.fact(5));
+// let math = require("./ourMath");
+// console.log(math.fact(5));
+
+let os = require("os");
+console.log("OS:", os.platform(), os.arch());
