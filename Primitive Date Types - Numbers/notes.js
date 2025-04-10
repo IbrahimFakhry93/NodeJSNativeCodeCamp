@@ -185,3 +185,34 @@ console.log(isFinite("0")); //* true
 //*==============================================================================
 
 //! 31 – Numbers – Math object
+
+//*==============================================================================
+
+//! 32 – Create and use your first module.
+
+//^ open: index.js - test.js
+
+//*==============================================================================
+
+//! 37 – Strings – important functions – part 01
+
+// let txt2 = "Hello, Hello, Ahmed";
+
+// exports.allIndexes = function (str, pattern) {
+//   let index = 0;
+//   let arr = [];
+
+//   for (let i = 0; i < str.length; i++) {
+//     index = str.indexOf(pattern, i);
+//     arr.push(index);
+//     i = index;
+//   }
+
+//   return arr;
+// };
+//*==============================================================================
+//! 38 – Strings – important functions – part 02
+
+let txt = "Hello, Hello, Ahmed";
+
+console.log(txt.replace(/\s/g, ","));
