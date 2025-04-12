@@ -1626,6 +1626,8 @@ for (let i = 0; i < html.length; i++) {
   extHtml = extHtml.replace('"ld-item-title">', "");
   extHtml = extHtml.trim();
 
+  // 01 &#8211; Prepare Development Environment
+
   extHtml = replaceSymbols(extHtml);
 
   //   extHtml = extHtml.replaceAll("&#" + extChar + ";", char);

@@ -216,3 +216,26 @@ console.log(isFinite("0")); //* true
 let txt = "Hello, Hello, Ahmed";
 
 console.log(txt.replace(/\s/g, ","));
+//*==============================================================================
+//! 41 – NPM – install and publish packages
+
+//* npm is made to ease modules exchanging private or oublic
+
+//* for example ourMath module we copy it and oaste to use in another folder
+//* so it can be oconsidered as pacjage to be used by anyone
+
+//* npm is consisited of:
+
+//* - register: databse for all packages
+//* - npm website to expolore the public packages
+
+//* packages can uploaded privately and apart of ateam can access this package.
+
+//* you need account for npm publish
+
+//* cli is download automatically with node js
+
+//? steps to publish the package
+
+//* npm login: so npm registery knows which account to publish on
+//* npm publish

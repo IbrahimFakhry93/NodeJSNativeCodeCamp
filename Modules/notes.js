@@ -1,4 +1,4 @@
-//! Common Modules:
+//! 26 – Modules – CommonJS (CJS)
 
 //* Modules is a method to organize the code in the application
 //* Divide the code into files
@@ -142,3 +142,97 @@ console.log(os.tmpdir());
 console.log(os.totalmem()); //* 16 gigabyte
 console.log(os.freemem()); //* 6 giga
 console.log(os.uptime() / 60 / 60); //* 6 giga
+//*================================================================
+
+//! 41 – NPM – install and publish packages
+
+//& Title: Introduction to npm
+//* npm is designed to simplify module exchange, whether private or public.
+//* For example, a module like "ourMath" can be copied and used in another folder.
+//* This module can be considered a package that can be utilized by anyone.
+
+//& Title: Components of npm
+//? npm consists of:
+//* - Registry: A database of all packages.
+//* - npm website: A platform to explore public packages.
+//* Packages can be uploaded privately, and specific team members can be granted access.
+//* To publish a package, you need an npm account.
+//* The CLI (Command Line Interface) is automatically downloaded with Node.js.
+
+//^ open: ourMath32.js by cmd terminal
+
+//& Title: Steps to Publish a Package on npm
+//? 1. npm Login
+//* Logs into your npm account, so the registry knows which account to publish on.
+//? 2. npm Publish
+//* Publishes the package to the npm registry for others to use (or for private access if specified).
+
+//*================================================================
+
+//! 42 – Modules – ECMAScript Modules (ESM)
+
+//^ create folder: esm
+//^ create inside esm.js, index.js
+
+//& Title: JavaScript and Node.js Modules - ECMAScript (ESM) vs CommonJS (CJS)
+
+//& Sub-title: Differences Between ESM and CJS
+//* - Syntax:
+//*   ESM uses `import` and `export` keywords.
+//*   CJS uses `require()` and `module.exports`.
+//*
+//* - Default Behavior:
+//*   ESM is the standard for JavaScript in browsers and is increasingly supported in Node.js.
+//*   CJS is the default module system in Node.js (up to Node.js 12; ESM support is added in later versions).
+//*
+//* - Asynchronous Nature:
+//*   ESM supports asynchronous loading of modules.
+//*   CJS loads modules synchronously.
+
+//& Sub-title: Similarities Between ESM and CJS
+//* - Both systems allow modular programming by splitting code into reusable files.
+//* - Both can coexist in the same Node.js project (with specific configurations).
+
+//& Sub-title: Using Each Module System - Syntax, Export, and Import
+
+(function () {
+  //? Example of ECMAScript (ESM):
+  //& File: math.mjs
+  // export const add = (a, b) => a + b;
+  // export const subtract = (a, b) => a - b;
+  //& File: app.mjs
+  // import { add, subtract } from './math.mjs';
+  // console.log(add(5, 3));  // Outputs: 8
+  // console.log(subtract(5, 3));  // Outputs: 2
+})();
+
+//? Example of CommonJS (CJS):
+//& File: math.js
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+module.exports = { add, subtract };
+
+//& File: app.js
+const { add, subtract } = require("./math");
+console.log(add(5, 3)); // Outputs: 8
+console.log(subtract(5, 3)); // Outputs: 2
+
+//& The Role of `.mjs` Extension
+//* - The `.mjs` extension explicitly identifies files as using the ESM format.
+//* - If the `"type": "module"` field is absent in `package.json`, Node.js requires `.mjs` for ESM files.
+
+//& Adding `"type": "module"` to `package.json`
+//* - You can use `"type": "module"` in the `package.json` file to default all `.js` files in the project to ESM.
+//& Example:
+// {
+//   "name": "example-project",
+//   "version": "1.0.0",
+//   "type": "module", // Marks all `.js` files in the project as ESM by default
+//   "main": "app.js"
+// }
+
+//& Coexisting CJS and ESM in a Project
+//* - In a project with both CJS and ESM, use `.mjs` for ESM files and `.js` for CJS files.
+//* - Alternatively, use `"type": "module"` for ESM and the `import()` syntax dynamically for CJS:
+//& Example:
+const cjsModule = await import("./math.js"); // Dynamically load a CJS module in an ESM file
