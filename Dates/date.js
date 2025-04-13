@@ -3,6 +3,7 @@
 const d = new Date(); //*
 console.log(d); //* Sat Apr 12 2025 18:12:21 GMT+0200 (Eastern European Standard Time)  , fixed snapshot of the time of thils line code when it ran, it won't change with time
 console.log(d * 1); //*  1744474385133 Epoch value in ms
+console.log(d.toISOString());
 
 // setInterval(() => {
 //   console.log(d);
@@ -52,3 +53,4 @@ console.log(date2); //* Mon Dec 02 2024 01:03:42 GMT+0200 (Eastern European Stan
 let date3 = new Date(" Hello the date is : 12 02 2024 01:03:42"); // the date is extracted from the text
 
 console.log(date3); // Mon Dec 02 2024 01:03:42 GMT+0200 (Eastern European Standard Time)
+//*============================================================
