@@ -6,7 +6,7 @@
 //* recursion is like loop
 
 //* recursive_function
-//* base case (condition) : condition which stops the recursion to avoid infinity loop
+//* base case (condition) : condition which stops the recursion to avoid infinity loop and base case contains the final code to be executed when recursion ends
 //* logic
 //* call function itself with parameter approaching the base condition to stop the recursive loop
 

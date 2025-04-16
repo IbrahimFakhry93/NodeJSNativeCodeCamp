@@ -137,3 +137,114 @@ if not, it continues checking without stopping.
 //*=================================================================================
 
 //! 52 – Asynchronous – Flow Control Patterns .. and more.
+
+//& Patterns to execute asynchronous code:
+
+//? In Series nested callbacks
+
+let fs = require("fs");
+
+fs.readFile("./01.txt", { encoding: "utf-8" }, function (err, data) {
+  console.log("01.txt read.");
+  let data_01 = "--" + data + "--";
+  fs.writeFile("./new_01.txt", data_01, function (err) {
+    console.log("new_01.txt created.");
+    fs.readFile("./02.txt", { encoding: "utf-8" }, function (err, data) {
+      console.log("02.txt read.");
+      let data_02 = "--" + data + "--";
+      fs.writeFile("./new_02.txt", data_02, function (err) {
+        console.log("new_02.txt created.");
+      });
+    });
+  });
+});
+
+//^ in console:
+
+// 01.txt read.
+// new_01.txt created.
+// 02.txt read.
+// new_02.txt created.
+
+//? In Series recursion:
+
+let array = ["one", "two", "three", "four", "five"];
+let result = [];
+
+function final() {
+  result.forEach((e) => console.log(e));
+}
+
+function recursive(e) {
+  //* Base Case
+  if (e == undefined) {
+    return final(); //~ 2) then print the results
+  }
+  //* Main Logic
+  fs.readFile(`./${e}.txt`, { encoding: "utf-8" }, function (err, data) {
+    if (!err) {
+      result.push(data); //~ 1) collect the output of reading file process
+      //* Call Itself
+      recursive(array.shift()); //^ shift: returns first element of the array and remove it from the array
+    } else {
+      console.warn(err);
+    }
+  });
+}
+
+recursive(array.shift());
+
+// The code demonstrates a recursive approach to reading files asynchronously in sequence.
+// It starts with an array of filenames, reads each file, stores its contents in the result array,
+// and continues until all files are processed. When finished,
+// it calls the final() function to output the results.
+
+//* We used recursive asynchronous approach above instead of loop,
+//* because loop by nature is sync code, so it doesn't guarantee the readFile process to be executed in sequence or in order
+//^==================================================================================
+//? In parallel: Sync loop:
+(function () {
+  let array = ["one", "two", "three", "four", "five"];
+
+  array.forEach((e) => {
+    fs.readFile(`./${e}.txt`, { encoding: "utf-8" }, function (err, data) {
+      if (!err) {
+        console.log(data);
+      } else {
+        console.warn(err);
+      }
+    });
+  });
+})();
+//^==================================================================================
+//? Limited in parallel:
+
+//* limit the async calls that happen at the same time
+//* we use this technique to slow down the code a little bit
+
+//* like sending many emails should be slowed down so th email server doesn't block us
+
+//* async call here in the example is setTimeout
+
+(function () {
+  let array = ["one", "two", "three", "four", "five"];
+  let max = 3;
+  let started = 0;
+
+  function recursive() {
+    while (array.length > 0 && started < max) {
+      started++;
+      let item = array.shift();
+      setTimeout(() => {
+        console.log(item);
+        started--;
+        recursive();
+      }, 1000);
+    }
+  }
+
+  recursive();
+})();
+
+//* max =3; it's the limit so not more than three callbacks (three timers in our example) are open at the same time
+//* started is a counter to store in the number of open callbacks at the same time
