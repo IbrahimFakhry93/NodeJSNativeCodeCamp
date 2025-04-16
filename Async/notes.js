@@ -116,4 +116,20 @@ if not, it continues checking without stopping.
 //? I don't understand this line according to the lecture
 //* event loop goes around each queue makes it empty then goes to the next queue
 
+//*=================================================================================
+
+//! 50 – Asynchronous – Callbacks Priorities Explanation
+
 //^ open: index2.js
+
+//* two queues in v8 are promise and nextTick
+
+//* they are called Macro Tasks.
+//* Macro tasks are existed in the browser as well as in node js
+//*
+
+//? according to node js documentation
+//* setImmediate queue is executed after I/O queue
+//* but because I/O is very slow process so its queue will be empty
+//* so when event loop goes around the queues, it will find the I/O queue is empty
+//* so it will execute the setimmediate queue first
