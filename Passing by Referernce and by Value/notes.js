@@ -18,7 +18,7 @@
 
 //? Conclusion
 //* The statement "the decimal value of a variable such as let salary = 2150.5; is stored in the heap and its address is on the stack" is essentially correct.
-//* In V8, non-SMI numbers (like 2150.5) are stored as HeapNumber objects in the heap, while their reference (address) is maintained on the stack.
+//* In V8, non-SMI numbers (like 2150.5) are stored as (HeapNumber objects) in the heap, while their reference (address) is maintained on the stack.
 
 //^ watch the video and the slides
 
@@ -92,15 +92,19 @@ console.log(new_arr);
 
   //^ look up the video and slider
   //~ in heap:
-  //* 0x10 is object person memory address in heap
-  //* name: 0x12  string address in heap
 
-  //* 0x12 : "person name"   string
+  //~? inside object in heap
+  {
+    //* 0x10 is object person memory address in heap
+    //* name: 0x12  string address in heap
+  }
+  //? string value in heap
+  //* 0x12 : "person name"
 
   //~ in stack:
   //* person: 0x10
 
-  //~ object copy
+  //~ object copy (reference copy)
   let new_person = person;
   //* new_person and person will have same memory address
   //* so there will be no two objects, only one object with two different addresses
@@ -133,14 +137,15 @@ console.log(new_arr);
   };
 
   function doit(newPerson) {
-    (newPerson.birth_year = 1998),
-      (newPerson.name = "ahmed"),
-      console.log("newPerson: ", newPerson);
+    newPerson.birth_year = 1998;
+    newPerson.name = "ahmed";
+    console.log("newPerson: ", newPerson);
   }
 
   doit(person);
   console.log("person: ", person);
 })();
+//*===================================================
 //& Passing object by value:
 
 (function () {
@@ -171,6 +176,8 @@ console.log(new_arr);
   //* it's a decision by programming language creators to declare string variable which hold same value of other string variable
   //* the two strings variable will have same address in heap
 })();
+
+//& shallow copy by spread operator for objects
 
 (function () {
   let person = {
