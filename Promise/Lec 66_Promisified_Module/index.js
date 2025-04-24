@@ -1,12 +1,49 @@
-//! 65 – Promise – Create Long Chain of Promises
+//!  66 – Promise – Promisified modules
 
 //& do this first in the terminal:
 
-//* cd 'C:\1Programming\1 Node JS Cloud Native\NodeJSNativeCodeCamp\Promise\Lec 65'
+//* cd 'C:\1Programming\1 Node JS Cloud Native\NodeJSNativeCodeCamp\Promise\Lec 66'
 
 const fs = require("fs");
 
-//* build the executor fot the Promise class
+//* note:
+//* fs.promises.readFile("./current_customer_id.txt", "utf-8") : returns a promise not the value of the file
+
+fs.promises
+  .readFile("./current_customer_id.txt", "utf-8")
+  .then((customerId) => {
+    return fs.promises
+      .readFile("./costumersData.txt1", "utf-8")
+      .then((data) => {
+        data = JSON.parse(data);
+        // console.log(data);
+        let { customers: customerData } = data;
+        // console.log(customerData);
+        customerData = customerData.filter(
+          (customer) => customer.id === +customerId
+        ); //* filter returns array, so customer data is array
+        // console.log(customerData);
+        if (customerData.length > 0) return customerData[0];
+        else return new Error("customer data not found");
+      });
+  })
+  .then((customer) => {
+    console.log(customer);
+    let flatObject = "";
+    for (const p in customer) {
+      flatObject += `${p}: ${customer[p]} \n`;
+    }
+    fs.promises.writeFile(
+      `./newCustomer_${customer.id}.txt`,
+      flatObject,
+      "utf-8"
+    );
+  })
+  .then(() => {
+    console.log("new file is created");
+  })
+  .catch(failure);
+
 function read_customer_id(resolve, reject) {
   console.log("read_customer_id");
   fs.readFile("./current_customer_id.txt", "utf-8", function (err, data) {
@@ -66,7 +103,7 @@ function failure(err) {
   console.error(err.message);
 }
 
-new Promise(read_customer_id)
-  .then(getCustomerData)
-  .then(writeCustomerData)
-  .catch(failure);
+// new Promise(read_customer_id)
+//   .then(getCustomerData)
+//   .then(writeCustomerData)
+//   .catch(failure);
