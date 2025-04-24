@@ -115,3 +115,7 @@ const promise = new Promise((resolve, reject) => {
 });
 
 //^ open index.js to see the practical example and understand
+
+//! Consume Promise by then:
+
+//* then method returns default promise
