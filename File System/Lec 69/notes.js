@@ -145,7 +145,7 @@ const destination = "./copy/customers.txt";
   copy();
 })();
 
-//*=====================================================
+//*====================================================================================================================================================
 
 //& temporary directory
 
@@ -158,3 +158,4 @@ fs.mkdtemp("tmp-", (err, folder) => {
 });
 //* This code uses Node.js's fs.mkdtemp() function to create a temporary directory.
 //* It takes a string as the prefix for the directory name, and the callback function handles errors or logs the newly created directory path.
+//*====================================================================================================================================================
