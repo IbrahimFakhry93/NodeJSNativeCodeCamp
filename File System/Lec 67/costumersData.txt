@@ -1,0 +1,148 @@
+{
+  "customers": [
+    {
+      "id": 101,
+      "name": "Alice Smith",
+      "email": "alice.smith@example.com",
+      "phone": "+1234567890",
+      "address": "123 Maple Street",
+      "city": "New York",
+      "country": "USA",
+      "registrationDate": "2022-01-05",
+      "status": "active",
+      "membership": "gold"
+    },
+    {
+      "id": 102,
+      "name": "Bob Johnson",
+      "email": "bob.johnson@example.com",
+      "phone": "+1234567891",
+      "address": "456 Oak Avenue",
+      "city": "Chicago",
+      "country": "USA",
+      "registrationDate": "2022-01-15",
+      "status": "active",
+      "membership": "silver"
+    },
+    {
+      "id": 103,
+      "name": "Charlie Davis",
+      "email": "charlie.davis@example.com",
+      "phone": "+1234567892",
+      "address": "789 Pine Road",
+      "city": "Los Angeles",
+      "country": "USA",
+      "registrationDate": "2022-02-10",
+      "status": "inactive",
+      "membership": "bronze"
+    },
+    {
+      "id": 104,
+      "name": "Diana Brown",
+      "email": "diana.brown@example.com",
+      "phone": "+1234567893",
+      "address": "321 Elm Street",
+      "city": "Houston",
+      "country": "USA",
+      "registrationDate": "2022-03-20",
+      "status": "active",
+      "membership": "gold"
+    },
+    {
+      "id": 105,
+      "name": "Edward Wilson",
+      "email": "edward.wilson@example.com",
+      "phone": "+1234567894",
+      "address": "654 Birch Lane",
+      "city": "Phoenix",
+      "country": "USA",
+      "registrationDate": "2022-04-15",
+      "status": "active",
+      "membership": "silver"
+    },
+    {
+      "id": 106,
+      "name": "Fiona Clark",
+      "email": "fiona.clark@example.com",
+      "phone": "+1234567895",
+      "address": "987 Cedar Drive",
+      "city": "Philadelphia",
+      "country": "USA",
+      "registrationDate": "2022-05-05",
+      "status": "active",
+      "membership": "gold"
+    },
+    {
+      "id": 107,
+      "name": "George Martinez",
+      "email": "george.martinez@example.com",
+      "phone": "+1234567896",
+      "address": "159 Walnut Street",
+      "city": "San Antonio",
+      "country": "USA",
+      "registrationDate": "2022-06-10",
+      "status": "inactive",
+      "membership": "bronze"
+    },
+    {
+      "id": 108,
+      "name": "Hannah Rodriguez",
+      "email": "hannah.rodriguez@example.com",
+      "phone": "+1234567897",
+      "address": "753 Poplar Avenue",
+      "city": "San Diego",
+      "country": "USA",
+      "registrationDate": "2022-07-20",
+      "status": "active",
+      "membership": "silver"
+    },
+    {
+      "id": 109,
+      "name": "Ian Lee",
+      "email": "ian.lee@example.com",
+      "phone": "+1234567898",
+      "address": "951 Spruce Street",
+      "city": "Dallas",
+      "country": "USA",
+      "registrationDate": "2022-08-15",
+      "status": "active",
+      "membership": "gold"
+    },
+    {
+      "id": 110,
+      "name": "Jessica Thompson",
+      "email": "jessica.thompson@example.com",
+      "phone": "+1234567899",
+      "address": "357 Hemlock Road",
+      "city": "San Jose",
+      "country": "USA",
+      "registrationDate": "2022-09-10",
+      "status": "active",
+      "membership": "platinum"
+    },
+    {
+      "id": 111,
+      "name": "Kevin White",
+      "email": "kevin.white@example.com",
+      "phone": "+1234567800",
+      "address": "468 Pine Street",
+      "city": "Austin",
+      "country": "USA",
+      "registrationDate": "2022-10-05",
+      "status": "active",
+      "membership": "gold"
+    },
+    {
+      "id": 112,
+      "name": "Laura Harris",
+      "email": "laura.harris@example.com",
+      "phone": "+1234567801",
+      "address": "789 Walnut Ave",
+      "city": "Jacksonville",
+      "country": "USA",
+      "registrationDate": "2022-11-20",
+      "status": "inactive",
+      "membership": "silver"
+    }
+  ]
+}
