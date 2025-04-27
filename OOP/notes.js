@@ -157,3 +157,73 @@ per2.display_name(); //* Ibrahim Bebo
 //*==================================================================================================
 
 //! 73 – OOP 03
+
+//* inheritance: class can inherit members from another class
+//* in other words, add members of class to another class
+
+//* polymorphism: child class can change the implementation of a method in a parent class
+
+//^ note:
+//* polymorphism can be applied only on public methods not private
+
+(function () {
+  //& Parent class
+  class Person {
+    constructor(first_name, last_name) {
+      this.first_name = first_name;
+      this.last_name = last_name;
+    }
+
+    list_permissions() {
+      return []; //* Person has no powers صلاحيات
+    }
+
+    can_create(param) {
+      return this.list_permissions().includes(param);
+    }
+  }
+
+  //& Child class
+  class Admin extends Person {
+    list_permissions() {
+      return ["Read", "Update", "create"];
+    }
+  }
+  //& Another Child class
+  class User extends Person {
+    list_permissions() {
+      return ["Read"];
+    }
+  }
+
+  //* prototype === parent
+  //* prototype of User is Person
+
+  //* prototype of Person is Object
+  //* any class you declare in JS will be child of Object
+
+  //* prototype of Object is null
+  //& usage part
+  let admin = new Admin("Almando", "Petro");
+
+  console.log(admin.can_create("create")); //* true
+  console.log(admin.can_create("delete")); //* false
+
+  let user = new User("Almando", "Petro");
+  console.log(user.can_create("Read"));
+
+  console.log(admin.full_name); //* JS will search through the prototype chain until find the full_name or find null if there is no full_name
+
+  //& to access prototype:
+  console.log(admin.__proto__); //* Person {constructor: ƒ, list_permissions: ƒ}
+  //? same
+  console.log(admin.constructor.prototype); //* Person {constructor: ƒ, list_permissions: ƒ}
+  // admin.constructor.prototype  === admin.__proto__
+
+  //& to check the class of an instance (admin)
+  console.log(admin.constructor.name); //* Admin
+  console.log(admin instanceof Admin); // true
+  console.log(admin instanceof Person); // true
+})();
+
+//^===================================
