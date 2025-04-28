@@ -47,18 +47,16 @@
 })();
 
 //*====================================================================
+console.log(
+  "================================================================================="
+);
+//*====================================================================
 
 //! 77 – Regular Expression – Quantifiers
 
 //* to define number of characters to be met
 
-console.log(
-  "================================================================================="
-);
 (function () {
-  //* to extract the backslash itself, you need to aad one more backslash in the string and the pattern
-  //* because both string and pattern treats the \ as escape character
-
   let str = `Almondo.. 1231232 \\#$% 
   Petro 20`;
 
@@ -71,7 +69,7 @@ console.log(
 
   //* if we add comma to the quantifier, so it means at least two characters
 
-  let reg2 = /\.{2,}/g;
+  let reg2 = /\.{2,}/g; // two dots at least
   let reg3 = /\w{2,}/g; // Two letters at least next to each other, but they do not have to be identical.
   let reg4 = /\d{3,4}/g; // at least three numbers, maximum four numbers
 
