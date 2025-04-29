@@ -1,8 +1,9 @@
 //! 75 – Regular Expression – Introduction & Character Classes
+
 //& two usages of regular expressions:
 
-//* validation: validate a certain text contains certain specifications or character or letters
-//* text extraction: We extract parts of the text that meet certain specifications. (extract substring of a text)
+//* 1) validation: validate a certain text contains certain specifications or character or letters
+//* 2) text extraction: We extract parts of the text that meet certain specifications. (extract substring of a text)
 
 //* expression === pattern
 
@@ -48,9 +49,11 @@ let data = `[
 //* website address === domain
 //* tld : toplevel domain  === .com
 
-let tld = "com"; //* we mutate to 'gov' 'edu'  as the user likes, the user can mutate form an interface
+let tld = "com"; //* we mutate to 'gov' 'edu'  as the user likes, the user can mutate form an UI interface
 
 let emailPatternObj = new RegExp("[\\w]+@[\\w]+\\." + tld, "g"); //* g is flag, without flag g, the regex will stop searching after first match
+// let emailPatternObj = new RegExp("\\w+@\\w+\\." + tld, "g");    //! no difference if without square brackets
+
 let emails1 = data.match(emailPatternObj); //* return array, if nothing matches, it returns null
 // if (emails1 != null) console.log(emails1.join("\n"));
 
@@ -123,7 +126,9 @@ let reg = /[doa]/;
 //* regex will search for any of these characters regardless of the order of these characters
 //console.log(reg.test(str)); //* true
 
-// console.log(str.match(reg).join("\n")); //* return only: a
+// console.log(str.match(reg).join("\n")); //* return only: a, the first match
+
+//* return all the matches
 
 let regGlobal = /[doa]/g;
 
@@ -132,9 +137,13 @@ let regGlobal = /[doa]/g;
 let reg1 = /dao/; //* regex engine will search for exactly matched string (dao)
 //console.log(reg1.test(str)); //* false
 
-// character - means range in regex
+//?=====================================================
 
-// so if we want to extract hyphen charcter(-) as regular character
+//~ hyphen character (-)
+
+//* hyphen character (-) represent range in regex
+
+// so if we want to extract hyphen charcter(-) as regular character not as range
 // we put it, at first or at end of the regex inside []
 let str_hyphen = "almondo-petro";
 
@@ -149,10 +158,12 @@ console.log(str_hyphen.match(regHyphen).join("\n"));
 // [^0-9]     //* Matches any NON-digit character
 // [^aeiou]   //* Matches any NON-vowel character
 
+//?=====================================================
+
 //~ the dot (.) character
 
 /*
-In regular expressions, the dot (.) character is a wildcard that matches any single character except a newline (\n).
+//* In regular expressions, the dot (.) character is a wildcard that matches any single character except a newline (\n).
 
 Examples of Using . in Regex:
 ----------------------------------------------------
@@ -177,10 +188,23 @@ world
 let strDot = "Ibrahim Petro";
 
 let regDot = /p.../;
+
 console.log(regDot.test(str)); //* true
 
+//^ or use quantifier (+)
 console.log(str.match(regDot).join("\n")); //* petr
-//*=================================================================
+(function () {
+  let strDot = "Ibrahim Petro";
+
+  let regDot = /p.+/i; //* /p.+/i  === /p.{1,}/i
+
+  //* flag i: means match uppercase or lowercase
+
+  console.log(regDot.test(strDot)); //* true
+
+  console.log(strDot.match(regDot).join("\n")); //* Petro
+})();
+//*==================================================================================================
 /*
 ^(?=(.*[A-Z]){2,})(?=(.*[!@#$%^&*()\-_+={};<.>]){2,}).{12,}$
 

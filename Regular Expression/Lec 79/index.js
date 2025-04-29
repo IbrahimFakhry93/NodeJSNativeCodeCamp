@@ -134,6 +134,9 @@ Families stroll along the promenade, enjoying the view.
 9. The sky turns a brilliant shade of orange and pink as the sun sets!
 10. Night falls, and the city lights up, ready for another vibrant evening in Hurghada.`;
 
+  //? Requirement:
+  //* pattern to match all strings which start by number and it ends with !
+
   let reg = /^\d.*!$/gm;
 
   let match = "";

@@ -13,10 +13,11 @@
 
   if (matches != null) console.log(matches);
 
-  //* \d: any digit   === [0-9]
-  //* \D: anything except digit   === [^0-9]
+  //* \d: any digit  === [0-9]
+  //* \D: anything except digit  === [^0-9]
 
   //* \w: any word, but not space and not special symbols (#$%) === [a-zA-Z0-9]
+  //~ \w+ representing one or more word characters (letters, digits, and underscores).
   //* \W: word  === [^a-zA-Z0-9]
 
   //* \s: search for space
@@ -26,7 +27,7 @@
 //*===============================================================
 
 (function () {
-  //* to extract the backslash itself, you need to aad one more backslash in the string and the pattern
+  //* to extract the backslash itself, you need to add one more backslash in the string and the pattern
   //* because both string and pattern treats the \ as escape character
 
   let str = `Almondo. \\#$% 
@@ -43,7 +44,7 @@
 
   //* \.: to search for dot itself
 
-  //* . : . without backslash means all
+  //* . : . without backslash means all except new line
 })();
 
 //*====================================================================
@@ -70,7 +71,7 @@ console.log(
   //* if we add comma to the quantifier, so it means at least two characters
 
   let reg2 = /\.{2,}/g; // two dots at least
-  let reg3 = /\w{2,}/g; // Two letters at least next to each other, but they do not have to be identical.
+  let reg3 = /\w{2,}/g; // Two letters at least next to each other, and they do not have to be identical.
   let reg4 = /\d{3,4}/g; // at least three numbers, maximum four numbers
 
   //* \d+  === \d{1,}

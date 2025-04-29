@@ -77,7 +77,7 @@
   let str = "quantity 5, the price is 40 USD";
 
   let reg = /(?<!quantity\s)\d+/g; // with lookahead  (?!)
-  //* look for all digits that don't have space and USD or EU after it
+  //* look for the digit that not after it space and quantity
 
   console.log(reg.test(str)); //* true
   let match = str.match(reg); //* ['40']

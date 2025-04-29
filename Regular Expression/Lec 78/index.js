@@ -1,8 +1,8 @@
 //! 78 – Regular Expression – Grouping
 
-//* with grouping, we use exec to view the matches because it has property is called grouping
+//* Grouping: divide the pattern into sub patterns
 
-//* divide the pattern into sub patterns
+//* with grouping, we use exec to view the matches because it has property is called grouping
 
 (function () {})();
 //*===============================================================
@@ -103,7 +103,7 @@ while ((match = reg.exec(str))) {
 //* its effect depends on its usage place in the pattern
 
 //? first use
-//* ?: makes the characters and grouping before it optional
+//* ?  makes the characters and grouping before it optional
 
 (function () {
   let str = "image.jpg photo.png name";
