@@ -13,19 +13,26 @@ let data = `[
 
 let tld = "com"; //* we mutate to 'gov' 'edu'  as the user likes, the user can mutate form an UI interface
 
-let emailPatternObj = new RegExp("[\\w]+@[\\w]+\\." + tld, "g"); //* g is flag, without flag g, the regex will stop searching after first match
-// let emailPatternObj = new RegExp("\\w+@\\w+\\." + tld, "g");
-// console.log(emailPatternObj.test(data));
-// let emails1 = data.match(emailPatternObj); //* return array, if nothing matches, it returns null
+let reg = new RegExp(`\\S+@\\S+\.${tld}`, "g");
 
-// if (emails1 != null) console.log(emails1.join("\n"));
-//*=====================================
+console.log(reg.test(data));
 
-let strDot = "Ibrahim Petro";
+// try {
+//   let matches = data.match(reg);
+//   console.log(matches);
+// } catch (err) {
+//   console.error(err.message);
+// }
 
-let regDot = /p.+/i;
-//? or use quantifier
-console.log(regDot.test(strDot)); //* true
+let matches = "";
 
-console.log(strDot.match(regDot).join("\n")); //* petr
-//*===================================================
+while ((matches = reg.exec(data))) {
+  console.log(matches[0]);
+}
+
+let reg2 = /\S+@\S+\.[a-z]{2,}/g;
+
+console.log(reg2.test(data));
+
+let matches2 = data.match(reg2);
+console.log(matches2);

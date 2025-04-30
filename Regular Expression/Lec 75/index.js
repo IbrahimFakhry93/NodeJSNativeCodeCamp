@@ -9,6 +9,17 @@
 
 //* Regular expression is a part of String Search Algorithm
 //* the result of this algorithm, multiple strings that share same specifications
+//*=======================================================================================================================
+
+//? Why Does \ Need Escaping?
+// Because \ itself is a special character.
+// To use an actual backslash in a string or regex, you need \\.
+
+//? Example:
+console.log("This is a backslash: \\");
+
+// This will correctly output:
+// This is a backslash: \
 
 //*=======================================================================================================================
 //& Required to extract all the emails
@@ -143,8 +154,8 @@ let reg1 = /dao/; //* regex engine will search for exactly matched string (dao)
 
 //* hyphen character (-) represent range in regex
 
-// so if we want to extract hyphen charcter(-) as regular character not as range
-// we put it, at first or at end of the regex inside []
+//* so if we want to extract hyphen charcter(-) as regular character not as range
+//* we put it, at first or at end of the regex inside []
 let str_hyphen = "almondo-petro";
 
 let regHyphen = /[-A-Z]/g; //* we put it at first
