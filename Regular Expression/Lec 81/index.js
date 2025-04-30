@@ -128,3 +128,30 @@ console.log("Without Lookahead:", regexWithoutLookahead.test(sample));
 //* whereas the modified pattern forces them to appear in a specific order.
 
 //?==========================================================================================
+
+//& Example:
+
+//* Validate an email
+
+//* email is divided into parts
+//* email name (address) which is the part on the left of the @
+//* domain name on the right of @
+
+//* address@domain.tld
+
+//* address@domain.com
+
+//? restrictions:
+//* any group of chars that contains only one @ and doesn't contain space
+//* no more than one dot in the email name (address)
+//* no more than one digits in the email name (address)
+//* the part after @ may contains from 1 to 2 dots only ==== ahmed82@uni.edu.eg
+//* the total length between 10 and 50
+
+(function () {
+  let data = "ahmed82@uni.edu.eg";
+
+  let reg2 = /^(?=\.?)\S+@(?=\.{1,2})\S{10,15}$/;
+
+  console.log(reg2.test(data));
+})();
