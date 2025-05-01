@@ -4,7 +4,8 @@
 
 //* HTTP protocol is a text based
 
-//* client === user agent === user browser === your device === command line on OS terminal to
+//* client === user agent === user browser === your device === command line on OS terminal
+//* === here means can be
 
 //* server address is linked to domain name
 
@@ -14,7 +15,7 @@
 
 //* official name of any link on internet is called URL
 
-//* URL: uniform Resource Locator
+//* URL: Uniform Resource Locator
 
 //* URI: Unified Resource Identifier, specified for resource: ID, online service
 
