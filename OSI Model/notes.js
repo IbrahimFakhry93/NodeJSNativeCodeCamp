@@ -1,75 +1,165 @@
+//! Watch List – OSI Model
+
+//^ look up slides
+
 //* OSI: open system interconnection
 
+//& Network Devices:
+
+//~ Modem:
+
 //* modem connects you with internet
-//* modem recieves the signal
+//* modem receives the signal
 
-//* router: gate network
+//& Title: Understanding How a Modem Works
 
-//* hub: recieves signal from router, it distrubtes it over all devices
+//? 1. Modem's Role in Internet Connection
+//* The modem is responsible for connecting you to the internet.
+//* It acts as a bridge between your local network (home router, laptop) and your ISP (Internet Service Provider): internet company (WE)
 
-//* switch: send data to the recipent device only using physical address
-//* every device has physical address
+//? 2. Modem Receiving Signals
+//* The modem receives signals from the ISP over a physical medium (such as fiber, DSL, or cable).
+//* These signals can be either digital or analog, depending on the technology used.
 
+//? 3. Signal Conversion
+//* Traditional dial-up modems converted **digital signals to analog** for phone-line transmission.
+//* Modern broadband modems mainly convert signals between **different digital formats**, NOT analog.
+
+//? 4. Difference Between Old and New Modems
+//* **Dial-up Modems**: Convert digital signals from the computer to analog for transmission over phone lines.
+//* **Broadband Modems**: Handle only digital signals, converting between various digital encoding techniques.
+
+//^===================================
+
+//~ Router:
+//* router:  network gate after modem
+//* it receives data that relates to its connected network and refuse other data
+//& Title: Understanding the Role of a Router
+
+//? 1. What is a Router?
+//* A router acts as a network gateway, positioned after the modem.
+//* It directs data between devices within a local network and the internet.
+
+//? 2. Data Handling by the Router
+//* The router receives data packets and determines whether they belong to its connected network.
+//* It **forwards** relevant data to local devices and **filters out** unrelated data.
+
+//? 3. Router vs. Modem
+//* The **modem** connects your home network to your ISP and handles internet access.
+//* The **router** manages data traffic within the local network and ensures correct device communication.
+
+//? 4. Importance of a Router
+//* Provides security by blocking unauthorized access.
+//* Supports multiple devices through wired or wireless connections.
+//* Improves network efficiency by directing traffic intelligently.
+//^================================================================================================
+
+//~ home router:
+//* multifunctional device: modem + router + switch
+
+//^================================================================================================
+//~ Hub:
+
+//* hub: it is rare to use now
+//* hub: creates internal network among number of devices
+//* hub: receives signal from router, it distributes it over all devices in the local network
+//^================================================================================================
+
+//~ Switch:
+//* switch is smarter than hub
+//* It receives signal from router and sends data to the port of recipient device only using physical address
+//* every connected device to switch has physical address
+//^================================================================================================
+
+//~ Network Interface Card (NIC)
 //* NIC: any PC has NIC to connect with internet
 
-//* home router:
-//* multofunctional device: modem + router + sitch
+//^================================================================================================
 
-//* OSI operates in every device (pc, mobile, server)
+//~ Repeater:
+//* Strengthen the signal in network cable
+//* it is rare to use in home
+//^================================================================================================
 
-//* OSI layer are logical layers not physcial
+//& OSI Model:
+
+//* OSI standardizes networking functions into seven layers.
+//*  It organizes how data moves from one device to another across a network
+
+//* OSI has standard
+//* OSI exists in every device (pc, mobile, server)
+
+//* OSI layers are logical layers not physical
 //* OSI layers are functions
 //* function is a software or a hardware or even a firmware
 
-//* a hardware or a software can do mulitple functionsi ndifferent OSI layers
+//* a hardware or a software can do multiple functions in different OSI layers
 
-//^ open a webssite
-//*  webiste request pass through the seven OSI layers
+//* Supports protocol standardization so different systems can communicate.
+//* Organizes communication into layers, preventing dependency on a single technology.
+
+//^ Example:
+
+//^ open a website
+//* Website (client / user agent) request passes through the seven OSI layers
+
+//* to send request by browser, we use protocols (HTTP/HTTPS)
+//* These protocols are the application layer
 
 //* http request is prepared by two OSI layers
-//* Application layer and presentation layer
-//* hhtp has no connection
+//* Application layer (HTTP) and presentation layer (HTTP + TLS = HTTPS)
+//* HTTP has no connection
 //* socket starts the connection
 
-//? application layer  === HTTP, DNS
+//? application layer === HTTP, DNS
 //* protocols are the application layer
-//* application is not the gui, they are the protocols
+//* application here is not the GUI program, they are the protocols (HTTP/HTTPS)
 
-//* request to be sent after resolve host name (get the ip associated with domanin)
+//* request to be sent after resolving the host name (get the ip associated with domain)
+//* host name must be converted to IP (IP Host)
+//* this is done by domain name server (DNS)
 
 //^ this flow happens to get the ip of the hostname
 //* DNS recursor => Root nameserver => TLD nameserver => Authoritative nameserver
+
+//* Every company provides hosting for websites or domains,
+//* have database of DNS records that relates every domain to its IP address
 
 //* DNS: Domain name server
 //* TLD: top domain server
 
 //? presentation layer === TLS
-//* TLS (formerly ssl) encrypt the http request
+//* TLS (formerly ssl) encrypt the http request (except the IP not encrypted)
 ///* presentation here means the form of the data
-//* json is apart of presentation layer
+//* json or xml is a part of presentation layer
+
+//* HTTP + TLS === HTTPS
 
 //? Session Layer  === Network Socket
-//* next stage:
-
-//* asking OS for creatig Network socket (BSD UNIX Socket)
-//* socket is an object collects data of connection (the port used in the connection)
-//* define it the port to connect with on the server
+//^ next stage:
+//* asking OS for opening Network socket (BSD UNIX Socket)
+//* socket is an object collects data of connection (ex. the ports used in the connection)
+//* socket defines the port to connect with it on the server
 //* socket is the start of real connection
 
 //? Transport Layer:  === TCP
-//* first protocol to transport the data
+//* TCP is the first protocol to transport or move the data
 
 //* TCP: Protocol, it is binary protocol
-//* Add TCP header to HTTP Data (TCP Segment)
+//* TCP adds TCP header to HTTP Data (TCP Segment)
 
 //* TCP is binary protocol
 //* HTTP is a text based protocol (key, value)
 
 //* TCP contains:
 //* source port - destination port - sequence number - acknowledgment Number....
+//* sequence number: data divides into parts
+//* first protocol to divide the data by sequence number
+//* to guarantee the data to be sent in correct order
+
 //* acknowledgment number assures that server received the sent sequence data
 
-//* TCP is the first protocol to divide the data by sequence number
+//* TCP is the first protocol to divide the data (HTTP Data Chunk) by sequence number
 //* so TCP guarantee data sent in its correct order after division
 
 //* Max size of TCP segment is 64 KB
@@ -78,8 +168,8 @@
 //? Network Layer:  === IP (internet protocol)
 
 //* Next protocol received TCP is the IP
-//* IP add to the request IP hEADER
-//* so the request now contain IP Header + TCP Header + HTTP Data (IP Packet)
+//* IP add to the request IP Header
+//* so the request now contains [ IP Header + TCP Header + HTTP Data ] (IP Packet)
 
 //* IP header is binary too
 
@@ -89,16 +179,30 @@
 //* Ethernet
 
 //* Ethernet adds Ethernet Header and Ethernet Footer to Data (Ethernet Frame)
-//* Ethernet Frame is i binary form
-//*  Ethernet Header contains unique MAC address exists in NIC
+//* Ethernet Frame is in binary form
 //* Ethernet relates to physical address
+
+//* Ethernet Header contains unique MAC address (MAC address of your router) printed in NIC :Network Interface Card (NIC)
+
+//* MAC address is physical address can't be mutated , but IP is logical address can be mutated
 
 //* Data after data link layer, will be labelled by MAC address of your router (gateway)
 
+//* Your device will send data to the router after knowing MAC address of the router by ARP protocol
+//* Your device sends ARP request
+
+//~ ARP:
+//* ARP: address resolution protocol
+//* ARP is binary form too
+
 //* ARP protocol between Router and the device (ex. laptop) revise the video
+
 //* Router responds to device by ARP reply
 
 //* MAC revise the video
+
+//^ look up slide 12.jpg
+
 //? Physical Layer:
 
 //* its main function: data transport physical mean or media
