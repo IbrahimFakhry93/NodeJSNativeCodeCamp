@@ -119,3 +119,23 @@
 //* and few of application layer (http)
 
 //* network engineer: from physical layer to transport layer
+
+//*==========================================================================
+//& Title: What is Vim?
+//
+//? Explanation:
+//* Vim is a highly configurable text editor developed for efficient text editing.
+//* It is an improved version of the classic Unix editor called "vi" (hence the "Vim" stands for "Vi IMproved").
+//* Unlike typical text editors, Vim is "modal," meaning it has different modes:
+//*   - Normal Mode: For navigating and executing commands.
+//*   - Insert Mode: For entering and editing text.
+//*   - Visual Mode: For selecting blocks of text.
+//* This mode-based design lets you perform complex text manipulations quickly using just the keyboard.
+//* Vim is especially popular among developers, system administrators, and power users who appreciate its speed,
+//* extensibility, and the ability to work entirely without a mouse.
+//
+//? Fun Fact:
+//* Vim has a reputation for having a steep learning curve, but many swear by its efficiency once mastered. 😂
+console.log(
+  "Vim is a powerful, modal text editor designed for speed and efficiency!"
+);
