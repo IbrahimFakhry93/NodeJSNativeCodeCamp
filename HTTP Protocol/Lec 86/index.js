@@ -47,6 +47,7 @@ const server = http.createServer(async (req, res) => {
 
   switch (url.path) {
     case "/":
+      console.log(req.headers);
       res.end("this is a response.");
       break;
     case "/hi":
@@ -58,7 +59,7 @@ const server = http.createServer(async (req, res) => {
       if (auth) {
         //* generate token by server (we are in server here!)
         const token = await generateToken();
-        //* sending the token to the client
+        //* sending the token to the client (client is postman or our created client in client.js or client2.js in Lec87)
         res.end(token);
       } else {
         res.statusCode = 403;
