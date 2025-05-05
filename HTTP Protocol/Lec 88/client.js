@@ -133,3 +133,17 @@ function who(token) {
 }
 
 // login();
+
+//^ test simulation:
+
+//* open cmd
+
+//* cd "C:\1Programming\1 Node JS Cloud Native\NodeJSNativeCodeCamp\HTTP Protocol\Lec 88"
+
+//* run on cmd: node server.js
+
+//* run by vs code tab (run) client.js
+
+//^ note:
+//* any consoles in server.js will be shown on cmd
+//* any consoles in client.js will be shown on debug console tab in vs code
