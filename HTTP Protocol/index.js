@@ -361,9 +361,9 @@ const http = require("http");
 
 //* Node JS provides Net module to interact with TCP protocol
 
-//* http module depends on Net Module which is responsible to communicate with OS and port requesting and sockets
+//* http module depends on Net Module which is responsible to communicate with OS and port requesting and all network stuff like sockets
 
-//* http module is responsible for reading and forming http responses
+//* http module is responsible for reading and forming http requests and responses
 
 //^ create server:
 
@@ -396,7 +396,7 @@ const server = http.createServer((req, res) => {
 //* createServer returns object
 //* createServer receives callback which is invoked when http server receives request
 
-//* req contains all information about the request that we will send
+//* req contains all information about the request that we will send by the client
 //* res object that we will use to send response to the client
 
 //* res.end: we use it to send the last part of the response or to send the whole response if it's small
@@ -416,7 +416,7 @@ server.listen(8000, () => {
 
 //* the callback inside listen will be invoked when the server starts to listen on a port
 
-//* run on terminal:
+//* run on vs code terminal:
 //~ node index
 // it will give:
 // the server has already started, server is running on port 8000
@@ -424,13 +424,13 @@ server.listen(8000, () => {
 //* To stop the server without closing the terminal, you can use the following shortcut:
 //~ Press Ctrl + C in the terminal.
 
-//* go to browser and send this request:
+//^ go to browser and send this request:
 //~ localhost:8000
 
 //* it returns on the screen:
-// this is a response.
+//~ this is a response.
 
-//* inspect => network tab and refresh again
+//^ inspect => network tab and refresh again
 //* you will find browsers made two requests:
 //* localhost
 //* favicon
@@ -493,10 +493,13 @@ server.listen(8000, () => {
 //* go to browser and test:
 //* localhost:8000/login
 //! not found 404
+//* because we haven't added a handling to this specific path in the server
 
 //? adjust the server to make it accept request in case it contains certain headers
 //* so refuse certain requests by their headers
 
+//! to stop serve any requests from the browser
+//* this header (req.headers["accept-encoding"]) made by the browser
 // if (req.headers["accept-encoding"]) {
 //     res.statusCode = 400;
 //     res.statusMessage = "Bad Request";
@@ -547,5 +550,3 @@ server.listen(8000, () => {
 //* so the issue in http protocol is loose so we need in backend to manage many restrictions and conditions
 
 //*==========================================================================================================
-
-//! 84 – HTTP – Handle Multi Paths and Querystring

@@ -77,7 +77,7 @@ function hi() {
     options,
     (data) => {
       console.log("data:" + data); //* data receive from the server response, which is sent by res.end
-    },
+    }, //* body to be sent in post request
     {
       name: "ibrahim fakhry",
       age: 26,

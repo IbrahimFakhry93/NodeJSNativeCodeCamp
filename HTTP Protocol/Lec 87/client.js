@@ -25,8 +25,9 @@ const options = {
 //* send request and receive response
 
 let request = http.request(options, (res) => {
-  let data = "";
-  //* res: response object
+  //* res: response object and it's not the actual response, it's object to handle the received response( which will be data)
+
+  let data = ""; //* data received from response
   //* when object response(res) receives data, it emits (data) event
   res.on("data", (chunk) => {
     data += chunk;

@@ -17,7 +17,7 @@
 
 //* so we send token instead of password as credentials
 
-//* token can be encrypted json object or random text
+//* token can be encrypted json object (JSON Web Token) or random text
 //* Senior engineer or solution architect should decide which type of token should be
 
 //* this token must be renewed every certain of time after it expires
@@ -26,7 +26,7 @@
 
 //* limited permissions  صلاحيات محدودة
 
-//* we will ask the token by the user and password
+//* we will request for the token by the user and password
 
 //^ go to postman
 //* add request
@@ -42,7 +42,7 @@
 //* binary data converted into string
 //* base64 is not an encryption
 
-//* password and username converted into or encoded into base64
+//* password and username are encoded into base64
 
 //* base64 is used in emails, any attachment will be converted into base64
 
@@ -51,6 +51,30 @@
 //* buffer is used to allocate data in memory with certain bytes length and put the needed binary data
 //* this use case is rare in business applications
 //* buffer object is aimed to handle binary data
+
+//& Title: Clarification on Base64 String vs. Token in Basic Authorization
+
+//? Explanation:
+//* In HTTP Basic Authentication, the Authorization header is built like so:
+//*   "Basic " + base64Encode("username:password")
+//* The resulting base64 string simply encodes the username and password together.
+//* It is not, by itself, a secure token. It’s just an encoding mechanism (Base64) that converts binary data
+//* to a text format, making it easy to transmit. This string can easily be decoded to reveal the credentials.
+
+//? The Lecture’s Point on Tokens:
+//* Rather than sending the actual (or even encoded) username and password with every request,
+//* best practices recommend using a token once the user is authenticated.
+//? This token:
+//*  - May be a JSON Web Token (JWT) or another secure, randomly generated string.
+//*  - Has a limited lifespan and often restricted permissions,
+//*    reducing the risk if it is intercepted.
+//* Essentially, the token is a separate, more secure artifact that replaces the raw credentials in subsequent requests.
+
+//? Summary:
+//* The base64 string in Basic Auth encodes the credentials (username and password).
+//* It is not the secure token the lecture refers to.
+//* Instead, after initial authentication, you would generate a token (using secure methods),
+//* which is then sent with future requests (often in a "Bearer" Authorization header).
 
 //^ import node js http module
 const http = require("http");
@@ -126,7 +150,7 @@ function checkAuth(auth) {
 
   credentials = credentials.split(":");
 
-  return credentials[0] == "ibrahim93" && credentials[1] == "bebokepeer93";
+  return credentials[0] == "ibrahim93" && credentials[1] == "bebokepeer93"; //* boolean value
 }
 
 //* password isn't stored in database as plain text
@@ -134,6 +158,7 @@ function checkAuth(auth) {
 
 //* so when we receive the input password of user while sign in
 //* this password will be hashed again and compared to the hashed password stored in db
+//* if both equal, user will be signed in
 
 //*==========================================
 

@@ -9,13 +9,13 @@
 //* Client requesting a token using username and password
 //* server generate the token (by random bytes then convert it to Hexadecimal string)
 //* store the token in a file
-//* sending the token to the client by postman
-
 //* setTimeout a few seconds then delete the token from the file (expiring mechanism)
+
+//* sending the token to the client (res.end(token)) in /login endpoint
 
 //^=========
 
-//* client sending a request using the token
+//* client sending a request (/who) using the token (by postman: authorization tab => bearer token, enter the stored token   )
 //* check if the token exists in the file
 
 //^ go to postman:
@@ -23,10 +23,10 @@
 //* send get request on: http://localhost:8000/login
 //* authorization tab => basic token
 //* enter username: ibrahim93, password: bebokepeer93
-//* copy token from body response on postman
+//* copy token from body response on postman (postman is our client)
 //* send get request on: http://localhost:8000/who
 //* authorization tab => bearer token
-//* enter token: 8c1fa9045fda39a17239f88ad135792f
+//* enter token: 8c1fa9045fda39a17239f88ad135792f (the one we copy on postman body)
 
 //^ import node js http module
 const http = require("http");
@@ -59,7 +59,7 @@ const server = http.createServer(async (req, res) => {
       if (auth) {
         //* generate token by server (we are in server here!)
         const token = await generateToken();
-        //* sending the token to the client (client is postman or our created client in client.js or client2.js in Lec87)
+        //* sending the token to the client (client is postman or our created client in next lectures client.js or client2.js in Lec87)
         res.end(token);
       } else {
         res.statusCode = 403;
@@ -114,11 +114,11 @@ async function checkAuth(auth) {
     credentials = credentials.split(":");
     return credentials[0] == "ibrahim93" && credentials[1] == "bebokepeer93";
   }
-  //* client sending a request using the token by postman
 
+  //* client sending a request (/who) using the token (by postman: authorization tab => bearer token, enter the stored token   )
   if (auth.startsWith("Bearer ")) {
     auth = auth.replace("Bearer ", "");
-    console.log(auth);
+    console.log(auth); //* auth is the generated token
     //* check if the token exists in the file
     const tokens = await fs.promises.readFile("tokens", "utf-8");
     if (tokens) return tokens.indexOf(auth) >= 0; //* auth is the token send by client

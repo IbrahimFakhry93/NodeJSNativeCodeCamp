@@ -1,13 +1,8 @@
 //! 87 – HTTP – Create HTTP Client
 
-//* how to create http client in Node JS
-//* so our code communicate with the http server or http api
-//* and handle its response
-
 const http = require("http");
 
 //& Prepare the request
-//* localhost === 127.0.0.1 : represents server from local device (your computer)
 
 //* options request
 const options = {
@@ -34,7 +29,11 @@ function createRequest(options, cb) {
 
     //* close event: means response has reached its end
     res.on("close", () => {
-      if (cb) cb(data, res);
+      if (cb)
+        cb(
+          data,
+          res
+        ); //* send res because response has important data we may need it
       else console.log(data); //* here I can use the data
     });
   });
@@ -70,7 +69,7 @@ function login() {
     //* data:384a78089cf4c8a9f303863a7232fef1, it will appear in debug console when we run client2.js
     // who(data);
 
-    //* repeat request who endpoint after 8s
+    //* repeat request /who endpoint after 8s
     interval = setInterval(who, 8000, data);
   });
 }

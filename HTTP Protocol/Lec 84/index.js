@@ -18,6 +18,7 @@ const server = http.createServer((req, res) => {
   // let queries = extractQuery(req.url);
   //  console.log(queries); //* { name: 'ahmed', age: '24' }
 
+  //! to make the url path generic
   // const path = pathOnly(req.url);
 
   let url = processURL(req.url);
