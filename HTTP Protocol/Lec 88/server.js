@@ -30,9 +30,10 @@ const server = http.createServer(async (req, res) => {
           //* use req.on() and req.end() to capture the body comes in the request from the client
           let body = "";
           req.on("data", (chunk) => {
-            body += chunk; //* receives the body as json string
+            body += chunk; //* receives the body as json string from the client
           });
-          req.end("end", () => {
+          req.on("end", () => {
+            console.log("body:" + body);
             body = JSON.parse(body); //* convert body from json string to object, to access its properties
             res.end("hello POST: " + body.name);
           });

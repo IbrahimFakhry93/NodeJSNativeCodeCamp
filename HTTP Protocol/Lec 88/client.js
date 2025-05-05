@@ -26,17 +26,31 @@ function createRequest(options, cb, body) {
     res.on("data", (chunk) => {
       data += chunk;
     });
-
-    if (body) request.write(JSON.stringify(body)); //* send body in the request as string
+    //! error place to call request.write
+    // if (body) request.write(JSON.stringify(body)); //* send body in the request as string
+    // console.log("body client: " + body);
     //* close event: means response has reached its end
+    //* The 'close' event signals that no more data will be received from the server
     res.on("close", () => {
       if (cb) cb(data, res);
       else console.log(data); //* here I can use the data
     });
   });
 
-  //& Send Request:
+  //& send body in the request
+  //! my error that cause:  Unexpected end of JSON input
+  //! this error is occurred in the server, because the server received empty body
+  //! causing parsing error to be thrown
+  //! because I was calling request.write(JSON.stringify(body)) inside the http.request callback above
+  //! inside the HTTP response callback. However, by the time this callback is executed, you have already called request.end(),
+  //! which terminates the request. As a result, the body is never sent,
+  // //! so when the server listens for data on the "data" event (req.on('data')), it gets an empty string. Consequently, calling JSON.parse("") on an empty string results in the "Unexpected end of JSON input" error.
+  if (body) request.write(JSON.stringify(body)); //* send body in the request as string
 
+  //& Send Request:
+  //^ note:
+  //* request.end: finalize and terminates the request
+  //* so if you
   request.end();
 
   //& Handle Error:
@@ -50,7 +64,8 @@ function createRequest(options, cb, body) {
 
 function hi() {
   const options = {
-    method: " POST",
+    method: "POST", //! any space like " POST" can cause this error
+    //! Uncaught TypeError TypeError [ERR_INVALID_HTTP_TOKEN]: Method must be a valid HTTP token [" POST"]
     hostname: "127.0.0.1",
     port: 8000,
     path: "/hi",
@@ -61,7 +76,7 @@ function hi() {
   createRequest(
     options,
     (data) => {
-      console.log("data:" + data);
+      console.log("data:" + data); //* data receive from the server response, which is sent by res.end
     },
     {
       name: "ibrahim fakhry",
