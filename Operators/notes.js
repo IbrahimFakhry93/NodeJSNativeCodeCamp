@@ -1,4 +1,4 @@
-//! Operators – Arithmetic
+//! 05 Operators – Arithmetic
 
 //~ x++ post-increment operator:
 
@@ -34,7 +34,7 @@ console.log("Value of x: " + x); // Output: 6
 
 //* ======================================================================
 
-//! Operators – Arithmetic – Priorities (order of operations)
+//! 06 Operators – Arithmetic – Priorities (order of operations)
 // Initial expression
 let result = 5 * 2 + 6 ** 2 - (9 / 3) * 4;
 
@@ -64,11 +64,11 @@ console.log(result); // Output: 34
 
 //* ======================================================================
 
-//! Operators – Arithmetic – hands-on
+//! 07 Operators – Arithmetic – hands-on
 
 //* Any operator is just a function that executes a behavior
 
-//!  Operators – Assignments
+//! 08 Operators – Assignments
 
 // Initialize the variable
 var x = 5;
@@ -115,7 +115,7 @@ console.log(x); //* 10
 
 //*=============================================================================================================================
 
-//! Operators – Comparison
+//! 09 - Operators – Comparison
 // Assignment example
 let x = 5; // The "=" operator assigns the value 5 to the variable x
 
@@ -407,7 +407,7 @@ if (x.length < y.length) {
 
 //*=============================================================================================================================
 
-//! Logical Operator:
+//! 10 - Logical Operator:
 //~ && operator:
 
 // A simple function that simulates heavy-duty processing

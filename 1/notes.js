@@ -1,7 +1,7 @@
 //* to run index.js
 //* go to terminal: node index.js
 
-//! Variables:
+//! 03 Variables:
 
 //* Before any processing, all variables must be stored in the memory called RAM (Random Access Memory).
 //* The programming language initiates this request, which is then handled by the operating system.
@@ -47,7 +47,7 @@
 
 //*=============================================================================================================================
 
-//! Variables – hands-on
+//! 04 Variables – hands-on
 
 var data = 5; //* declaration
 data = 10; //* assignment
@@ -58,18 +58,19 @@ console.log(data); //* usage
 //! Variables cont in scope lesson 12
 
 //* const variable: variable that can't be changed after initialization
+//* const is read-only variable
 
 //*=================================================================================================================
 
-//! Declaration using var in different scopes
+//! Declaration using var in different scopes   (from lec 12 to 16)
 
 //~ Example 1:
 
 //* Global Scope
 var data = 5; // Declare a variable 'data' with the value 5 in the global scope.
-var data = 6; // Redeclare the variable 'data' in the global scope (allowed with 'var', but not recommended).
+var data = 6; // Redeclare the same variable 'data' in the global scope (allowed with 'var', but not recommended).
 
-//* Block Scope
+//* Block Scope such as if statement block
 {
   //* Accessing the variable before declaration in the block scope
   console.log(data); //* 6
@@ -102,20 +103,43 @@ console.log(x);
 //^ output:
 // 5
 // 6
-
+//^=======================================================
 var a = 3;
+
+//& c with var
 
 function first() {
   const b = 1;
 
-  console.log(c); //* undefined
+  console.log(c); //~ undefined
 
   if (true) {
     var c = 5;
     console.log(b);
   }
 
-  console.log(c); //* 5
+  console.log(c); //~ 5
+}
+
+//* Only let and const variables are block-scoped. Variables declared with var end up in the closest function scope;
+//* var will be hoisted to the top scope of first function
+
+//^=======================================================
+
+//& c with let
+
+first();
+function first() {
+  const b = 1;
+
+  console.log(c); //! Uncaught ReferenceError ReferenceError: c is not defined
+
+  if (true) {
+    let c = 5;
+    console.log(b);
+  }
+
+  console.log(c); //! Uncaught ReferenceError ReferenceError: c is not defined
 }
 
 first();
