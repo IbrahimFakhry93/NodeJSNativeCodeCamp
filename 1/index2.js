@@ -1,36 +1,14 @@
-//* c with var
+var data = 5;
 
-"use strict";
-
-function first() {
-  const b = 1;
-
-  console.log(c); //* undefined
-
-  if (true) {
-    var c = 5;
-    console.log(b);
-  }
-
-  console.log(c); //* 5
+function test() {
+  console.log(data);
+  var data = 6;
 }
-first();
-
-console.log("=========================================================");
-
-//* c with let
-
-function first2() {
-  const b = 1;
-
-  //   console.log(c); //! Uncaught ReferenceError ReferenceError: c is not defined
-
-  if (true) {
-    let c = 5;
-    console.log(b);
-  }
-
-  // console.log(c); //! Uncaught ReferenceError ReferenceError: c is not defined
+function testAfterHoist() {
+  var data;
+  console.log(data); //* undefined
+  var data = 6;
 }
 
-// first2();
+test(); //* undefined
+testAfterHoist(); //* undefined
