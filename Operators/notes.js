@@ -1,7 +1,7 @@
 //! 05 Operators – Arithmetic
 
 //~ x++ post-increment operator:
-
+//* assignment first then increment
 // Initialize the variable
 var x = 5;
 
@@ -19,6 +19,8 @@ console.log("Value of x: " + x); // Output: 6
 
 //~ ++x pre-increment operator
 
+//* increment first then assignment
+
 // Initialize the variable
 var x = 5;
 
@@ -34,39 +36,59 @@ console.log("Value of x: " + x); // Output: 6
 
 //* ======================================================================
 
-//! 06 Operators – Arithmetic – Priorities (order of operations)
+//! 06 Operators – Arithmetic – Priorities (Order of Operations)
 // Initial expression
 let result = 5 * 2 + 6 ** 2 - (9 / 3) * 4;
 
-//* Step 1: Evaluate parentheses first
-//* (5 * 2) evaluates to 10
-result = 10 + 6 ** 2 - (9 / 3) * 4;
+//* Explanation of the Evaluation Order:
+//? 1. Parentheses: Evaluate expressions inside ( ... ) first.
+//*    - Evaluate (9 / 3) which is 3.
+//*    Expression becomes: 5 * 2 + 6 ** 2 - 3 * 4
+//*
+//? 2. Exponentiation (**): Evaluate next because it has the highest precedence
+//*    among the remaining operators.
+//*    - Evaluate 6 ** 2 which is 36.
+//*    Expression becomes: 5 * 2 + 36 - 3 * 4
+//*
+//? 3. Multiplication and Division: Evaluate from left to right.
+//*    - Evaluate 5 * 2 which is 10.
+//*    - Evaluate 3 * 4 which is 12.
+//*    Expression becomes: 10 + 36 - 12
+//*
+//? 4. Addition and Subtraction: Evaluate from left to right.
+//*    - Evaluate 10 + 36 which is 46.
+//*    - Evaluate 46 - 12 which is 34.
+//* Final result: 34
 
-//* Step 2: Handle exponentiation (^)
-//* 6**2 (6 squared) evaluates to 36
-result = 10 + 36 - (9 / 3) * 4;
-
-//* Step 3: Perform division (/)
-//* 9 / 3 evaluates to 3
-result = 10 + 36 - 3 * 4;
-
-//* Step 4: Perform multiplication (*)
-//* 3 * 4 evaluates to 12
-result = 10 + 36 - 12;
-
-//* Step 5: Perform addition and subtraction (+ and -)
-//* 10 + 36 evaluates to 46
-//* 46 - 12 evaluates to 34
-result = 34;
-
-// Output the final result
 console.log(result); // Output: 34
+
+//! Title: Demonstrating operator precedence
+
+//? Operator precedence determines the order in which operators are evaluated in an expression
+//? In the expression now-1991 > now-2018,
+//~ the subtraction operators(-) have higher precedence than the greater than operator(>), so they are evaluated first
+
+let now = 2022;
+let result4 = now - 1991 > now - 2018; //* 31 > 4
+
+console.log(result4); //* Output: true
+
+//? In the expression x = y = 25 - 10 - 5:
+//* the subtraction operators(-) have higher precedence than the assignment operator(=),
+//* so they are evaluated first
+
+let x1, y1;
+x1 = y1 = 25 - 10 - 5; //* x = y = 10
+
+console.log(x1); //* Output: 10
+console.log(y1); //* Output: 10
 
 //* ======================================================================
 
 //! 07 Operators – Arithmetic – hands-on
 
 //* Any operator is just a function that executes a behavior
+//* Operator is jut like a function, it must return a value
 
 //! 08 Operators – Assignments
 
@@ -116,6 +138,10 @@ console.log(x); //* 10
 //*=============================================================================================================================
 
 //! 09 - Operators – Comparison
+
+//* There are many comparison operators in JavaScript.
+//* All of these operators return a boolean true or false value.
+
 // Assignment example
 let x = 5; // The "=" operator assigns the value 5 to the variable x
 
