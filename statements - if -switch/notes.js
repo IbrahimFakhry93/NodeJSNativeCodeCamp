@@ -1,3 +1,5 @@
+//* if statement
+
 //* switch statement is somehow similar to if else
 
 switch (expression) {
