@@ -177,15 +177,15 @@ console.log(os.uptime() / 60 / 60); //* 6 giga
 //& Title: JavaScript and Node.js Modules - ECMAScript (ESM) vs CommonJS (CJS)
 
 //& Sub-title: Differences Between ESM and CJS
-//* - Syntax:
+//? - Syntax:
 //*   ESM uses `import` and `export` keywords.
 //*   CJS uses `require()` and `module.exports`.
 //*
-//* - Default Behavior:
+//? - Default Behavior:
 //*   ESM is the standard for JavaScript in browsers and is increasingly supported in Node.js.
 //*   CJS is the default module system in Node.js (up to Node.js 12; ESM support is added in later versions).
 //*
-//* - Asynchronous Nature:
+//*? - Asynchronous Nature:
 //*   ESM supports asynchronous loading of modules.
 //*   CJS loads modules synchronously.
 

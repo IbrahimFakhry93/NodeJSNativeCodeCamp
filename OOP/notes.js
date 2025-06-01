@@ -1,5 +1,5 @@
 //! 71 – OOP 01
-//* OOPÖ
+//* OOP:
 
 //* form of descriptions and restrcitions to make the code maintainable and adjustable and esaz to interact with
 //* and more secure

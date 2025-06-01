@@ -29,9 +29,10 @@ while ((matches = emailPatternRegexLiteral.exec(data))) {
 }
 //* we use exec in case we need to do implementation or decision in every match
 
-//! 2) regular expression literal
+//! 2) regular expression literal  (//)
+// regular expression literal
 
-//~ let reg = /pattern/; // regular expression literal
+//~ let reg = /pattern/;
 let emailPatternRegexLiteral = /\w+@\w+\.[a-z]{2,}/g;
 
 // let emails = data.match(emailPatternRegexLiteral); //* return array, if nothing matches, it returns null
