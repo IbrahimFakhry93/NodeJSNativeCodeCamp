@@ -1,11 +1,11 @@
 //! 71 – OOP 01
 //* OOP:
 
-//* form of descriptions and restrcitions to make the code maintainable and adjustable and esaz to interact with
+//* form of descriptions and restrictions to make the code maintainable and adjustable and easy to interact with
 //* and more secure
 
 //* we model the application so the entities of the app be modelled as objects have a relation to each other
-//* these entitines can be modelled in Database or in the our programming language
+//* these entities can be modelled in Database or in the our programming language
 
 //* every entity is an object that contain the proper data( properties) and function or methods to process these data
 
@@ -62,18 +62,20 @@ per2.display_name(); //* Ibrahim Bebo
 //* Encapsulation and Abstraction are co-related
 //* Inheritance and Polymorphism are co-related
 
-//* Encapsulation:
+//? Encapsulation:
 
 //* collect all data and methods of certain entity in one container
 
-//* Abstraction:
+//? Abstraction:
 
-//* show only neccessary data nad methods to external world(ex.users) and hide the rest
-//* isolate the external world of the implementation of the data nad methods inside the class
+//* show only necessary data nad methods to external world(ex.users) and hide the rest
+//* isolate the external world of the implementation of the data and methods inside the class
 
-//* Inheritance
+//~ abstraction is: (hide details + isolate implementation) of the external world
 
-//* Polymorphism
+//? Inheritance
+
+//? Polymorphism
 
 (function () {
   class Person {
