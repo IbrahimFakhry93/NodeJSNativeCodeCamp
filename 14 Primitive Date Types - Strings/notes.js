@@ -1,5 +1,21 @@
 //! 36 – Strings – UTF-16
 
+//^ reading list
+
+//* any string is encoded as a binary based on a system which is UTF-16
+
+//* string is founded in 1988
+
+//* UTF-16 represent a single character in 16 bit (2 bytes)
+
+//* ask chatgpt unicode code point
+
+//* different representation of (د) in hexadecimal (8.png)
+
+//* every single emojis and egyptian hieroglyph stored as two characters
+
+//* Most programming languages are based on utf - 16
+
 //*=====================================================================================
 //! 37 – Strings – important functions – part 01
 

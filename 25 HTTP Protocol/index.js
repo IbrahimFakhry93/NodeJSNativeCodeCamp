@@ -537,7 +537,7 @@ server.listen(8000, () => {
 //* Don't make the client knows all the details by your server response because he can be a hacker
 //* المعرفة على قدر الحاجة
 
-//* Details of requests and responses are defined bz the developer team and especially the security member
+//* Details of requests and responses are defined by the developer team and especially the security member
 
 //^ Example:
 //* We don't want to serve requests coming from the browser.
