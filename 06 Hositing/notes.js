@@ -1,8 +1,9 @@
 //! Hoisting:
 
-//* Javascript does hoisting to any variable or func or obj or class declaration to the start of any block
+//* Javascript does hoisting to any variable or func or obj or class declaration to the start of the scope
 //* that this variable is declared in
-//* global scope, function scope
+//* scope here means the global scope or function scope for var
+//*
 
 //* undefined + undefined = NaN
 
@@ -26,7 +27,7 @@
 
 //& Title: Example of Hoisting with var
 
-//* Original Code:
+//~ Original Code:
 var x = 5;
 if (true) {
   console.log(x); // Expected output: 5
@@ -36,6 +37,8 @@ if (true) {
 }
 console.log(x); // Expected output: 6
 //* After the if block, 'x' now holds the updated value 6 since there's only one 'x' in the global scope.
+
+//~ After Hoisting:
 
 //? How Hoisting Works in This Example:
 //* When JavaScript processes the code, it effectively interprets it like this:
@@ -51,7 +54,9 @@ console.log(x); // Logs 6 since x has been updated
 //? Key Takeaways:
 //* 1. **Declaration vs. Assignment:** Only variable declarations (e.g., "var x;") are hoisted.
 //*    The assignments (like "x = 6") remain in place and execute in order.
+
 //* 2. **Scope Level:** 'var' does not create block scope; even inside an 'if' block, the variable
 //*    is hoisted to the surrounding function or global scope.
+
 //* 3. **Contrast with let/const:** Variables declared with 'let' or 'const' are block-scoped and
 //*    are not hoisted in the same manner as 'var', which can help avoid some of these issues.

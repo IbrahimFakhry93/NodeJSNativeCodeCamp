@@ -1,4 +1,4 @@
-//* to run index.js
+//^ to run index.js
 //* go to terminal: node index.js
 
 //! 03 Variables:
@@ -8,12 +8,12 @@
 //* The programming language, in collaboration with the operating system, further interacts with the hardware
 //* to ensure that input or output data is stored in the memory (RAM) as required.
 
-//* steps to create variable with value:
+//~ steps to create variable with value:
 //* 1. declaration" var data
 //* 2. initialization: var data = 5;
 //? or:
 //* var data;
-//* data = 5;  intialization will be in a place in the middle of the code not right after the declaration
+//* data = 5;  initialization will be in a place in the middle of the code not right after the declaration
 
 //? or:
 //* var x , y, strData;

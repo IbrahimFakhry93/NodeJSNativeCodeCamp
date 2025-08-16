@@ -1,5 +1,6 @@
 //! Lec 05 Operators – Arithmetic
 
+//! Precedence: post - fix, pre- fix
 //~ x++ post-increment operator:
 //* assignment first then increment
 // Initialize the variable
@@ -284,18 +285,18 @@ console.log(5 < 3); // Output: false
 console.log(6 < 7); // Output: true
 //* Explanation: 6 is less than 7, so the result is true.
 
-// Comparing a number with a string that can be converted to a number
+//~ Comparing a number with a string that can be converted to a number
 console.log(3 < "5"); // Output: true
-//* Explanation: The string "5" is converted to the number 5 for comparison. Since 3 is less than 5, the result is true.
+//~ Explanation: The string "5" is converted to the number 5 for comparison. Since 3 is less than 5, the result is true.
 
-// Comparing strings (based on Unicode values)
+//? Comparing strings (based on Unicode values)
 console.log("2" < "5"); // Output: true
 //* Explanation: "2" and "5" are compared based on their Unicode values. Since "2" comes before "5", the result is true.
 
 console.log("2" < "12"); // Output: false
-//* Explanation: "2" and "12" are compared based on Unicode values. "2" comes before "1" in "12", so the result is false.
+//* Explanation: "2" and "12" are compared based on Unicode values. "2" comes after "1" in "12", so the result is false.
 
-// Additional Information:
+//? Additional Information:
 //* In comparisons between a number and a string, the string is converted to a number for the comparison.
 //* In comparisons between two strings, the comparison is based on their Unicode values.
 
@@ -341,18 +342,18 @@ console.log("2" < "12"); // Output: false
 //? how? look at the function down
 
 /**
- * Function to compare two strings to determine if one is less than the other
+ ** Function to compare two strings to determine if one is less than the other
  * using their Unicode values, character by character.
  * @param {string} x - The first string to compare.
  * @param {string} y - The second string to compare.
  * @returns {boolean} - True if x is less than y, otherwise false.
  */
 function isLessThan(x, y) {
-  // Loop through each character in both strings up to the length of the shorter string.
+  //* Loop through each character in both strings up to the length of the shorter string.
   for (let i = 0; i < Math.min(x.length, y.length); i++) {
-    // Get Unicode value of the current character in string x
+    //! Get Unicode value of the current character in string x
     let cx = x.charCodeAt(i);
-    // Get Unicode value of the current character in string y
+    //! Get Unicode value of the current character in string y
     let cy = y.charCodeAt(i);
 
     // Compare Unicode values of the characters.
@@ -380,19 +381,19 @@ console.log(isLessThan("2", "12")); // Output: false
 console.log(isLessThan("apple", "banana")); // Output: true
 
 //! Explanation:
-//* Character-by-Character Comparison:
+//~ Character-by-Character Comparison based on unicode:
 
-// Each character in the strings is compared based on its Unicode value.
+//* Each character in the strings is compared based on its Unicode value.
 
-// The comparison stops as soon as a difference is found.
+//* The comparison stops as soon as a difference is found.
 
-//* String Length Comparison:
+//~ String Length Comparison:
 
-// If all characters are equal, the shorter string is considered smaller.
+//* If all characters are equal, the shorter string is considered smaller.
 
-//* Efficiency:
+//? Efficiency:
 
-// This approach ensures that comparisons are precise and align with how strings are evaluated lexicographically in programming
+//* This approach ensures that comparisons are precise and align with how strings are evaluated lexicographically in programming
 
 //! Less Than (<) Operator Algorithm for Comparing Two Strings
 
@@ -425,11 +426,23 @@ if (x.length < y.length) {
   }
 }
 
+//? other example:
+//^ open: slide 15.png
+console.log("xyz" < "abcdefghi"); // false
+//^ note: 16.png (it's just show how to compare string lengths)
+
 //! Greater Than Operator Algorithm
 //* x > y
 //* swap x and y
 //^ execute less than algorithm
 //* y < x
+
+//? summary:
+//~ two string comparison:
+//* compare character by character based on unicode for no of time equals the shortest string length
+
+//* if comparison based on unicode failed (both equal)
+//* then compare by length, shortest length is smaller
 
 //*=============================================================================================================================
 

@@ -1,11 +1,11 @@
-//! Declaration using var in different scopes   (from lec 12 to 16)
-
 //& look up the slides very important to understand
 //& and also look up the slides of hoisting and the notes file
 
 //? also:
 
 //& revise jonas scope and scope chain slides in js jonas course
+
+//! Declaration using var in different scopes   (from lec 12 to 16)
 
 //~ Example 1:
 
@@ -16,7 +16,7 @@ var data = 6; // Redeclare the same variable 'data' in the global scope (allowed
 //* Block Scope such as if statement block
 {
   //* Accessing the variable before declaration in the block scope
-  console.log(data); //* 6, we can access data because it's declared in global scope
+  console.log(data); //* 6, we can access data because it's declared in global scope because var is function scope so var doesn't see this block scope as a scope
   var data = 7; // Declare and assign a new value to 'data' in the block scope.
   console.log(data); // Output: 7 (the reassigned value within the block scope).
 }
@@ -32,7 +32,32 @@ function displayData() {
 displayData(); // Call the function to demonstrate function-scoped variable behavior.
 console.log(data); // Output: 7 (the value reassigned in the block scope).
 
+//? other explanation by chatgpt about var
+var data = 6;
+// Global scope: data is declared and initialized to 6.
+
+// Entering a bare block (not a new var scope)
+{
+  // At runtime here, the var-declaration inside this block has already been
+  // hoisted to the enclosing (global) scope and initialized to undefined.
+  // However, because var has no Temporal Dead Zone, it’s safe to read.
+  console.log(data);
+  // Output: 6
+  // Explanation: The global ‘data’ was set to 6, and the hoisted inner declaration
+  // doesn’t overwrite that value until its assignment below.
+
+  var data = 7;
+  // This is a redundant declaration of the same global ‘data’.
+  // The assignment updates data from 6 → 7.
+
+  console.log(data);
+  // Output: 7
+  // Explanation: After the assignment, data is now 7 in the global scope.
+}
+
 //^===========================================
+
+//! let declaration in different scopes
 
 //~ same Example with let:
 
@@ -119,7 +144,7 @@ function first() {
   console.log(c); //~ 5
 }
 
-//* Only let and const variables are block-scoped. Variables declared with var end up in the closest function scope;
+//* Only let and const variables are block-scoped. Variables declared with var end up in the closest function scope.
 //* var will be hoisted to the top scope of first function
 
 //^=======================================================
