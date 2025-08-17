@@ -31,7 +31,7 @@ colors.shift();
 //* callback function receives three parameters one obligatory, and two others are options
 //* this callback function must return a boolean value
 
-//? filter function
+//? filter callback function
 function more_than_enough(item) {
   return item > 60;
 }
@@ -42,7 +42,7 @@ let results = grades.filter(more_than_enough);
 
 // console.log(results);
 
-//? filter function as arrow function:
+//? filter callback function as arrow function:
 
 let results2 = grades.filter((item) => item > 60);
 // console.log(results2);
@@ -68,7 +68,7 @@ let results2 = grades.filter((item) => item > 60);
 //? example of filter deep copy:
 
 //* 1) use for loop
-//* 2) use push and structured clone
+//* 2) use push and structuredClone
 
 (function () {
   let arr = [{ firstName: "ahmed" }, { firstName: "yasser" }];
@@ -89,6 +89,32 @@ let results2 = grades.filter((item) => item > 60);
   // console.log(arr); // [ { firstName: 'ahmed' }, { firstName: 'yasser' } ]
 })();
 
+//? structuredClone() — Deep Copy in JavaScript
+
+/*
+✅ What It Does:
+- Creates a true deep copy of any structured data.
+- Avoids limitations of JSON.parse(JSON.stringify(...)).
+
+✅ Key Features:
+- Deep copies nested objects, arrays, Maps, Sets, etc.
+- Supports circular references.
+- Preserves types like Date, RegExp, TypedArrays.
+- Available in modern browsers and Node.js v17+
+
+⚠️ Notes:
+- Not supported in older environments (e.g. Internet Explorer, Node.js < 17).
+*- For legacy support, use lodash.cloneDeep() or write a custom deep copy function.
+
+📌 Example:
+const original = { name: "ahmed", meta: { age: 30 } };
+const copy = structuredClone(original);
+copy.meta.age = 99;
+
+console.log(original.meta.age); // 30 ✅ original untouched
+console.log(copy.meta.age);     // 99 ✅ deep copy mutated
+*/
+
 //*==============================================================================================================
 
 //& find:
@@ -106,6 +132,7 @@ let results2 = grades.filter((item) => item > 60);
 })();
 
 //& findLast:
+//* return the last element achieves the condition, doesn't return array
 (function () {
   function more_than_enough(item) {
     return item > 60;
@@ -114,7 +141,7 @@ let results2 = grades.filter((item) => item > 60);
   let grades = [20, 30, 40, 50, 60, 80, 90];
 
   let results = grades.findLast(more_than_enough);
-  // console.log(results); //* 80
+  // console.log(results); //* 90
 })();
 
 //& findIndex:
@@ -188,7 +215,7 @@ let results2 = grades.filter((item) => item > 60);
 //*==============================================================================================================
 
 //& map
-//* we use map twhen we want to execute a code on item on its own
+//* we use map then we want to execute a code on item on its own
 //* نتسخدم ماب عندما نريد تنفيذ كود على كل عنصر على حدى
 
 (function () {
@@ -244,6 +271,14 @@ let res = colors.map(flatArray);
 let resAfterFlat = colors.flatMap(flatArray);
 console.log(resAfterFlat); //* ['Black', 'Olive', 'Antique', 'White', 'Ash', 'Gray', 'Chili', 'Red', 'Forest', 'Green']
 
-//! important note:
-//* Any iterative method returns array by itself such as filter  and not like map
-//* so this method does shallow copy
+//! Important Note:
+//* Methods like filter, map, etc., return a **new array**.
+//* But they do **not** deep copy the objects inside.
+//* They perform a **shallow copy** of references.
+
+// 🔍 What Does That Mean?
+// When you use methods like .filter() or .map():
+
+// They create a new array ✅
+
+// But the objects inside are still references to the original ones ❌

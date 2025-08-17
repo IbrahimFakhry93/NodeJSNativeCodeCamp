@@ -60,3 +60,54 @@ console.log(x); // Logs 6 since x has been updated
 
 //* 3. **Contrast with let/const:** Variables declared with 'let' or 'const' are block-scoped and
 //*    are not hoisted in the same manner as 'var', which can help avoid some of these issues.
+
+//*======================
+
+//? let and const hoisting and TDZ
+
+/*
+
+   Code                               │   TDZ Timeline
+ ─────────────────────────────────── │ ──────────────────────────────
+{                                       │// Scope entry → TDZ starts for b & c
+  console.log(a);  // ✅ undefined      │ ↑ b & c uninitialized (TDZ active)
+  console.log(b); // ❌ ReferenceError│ │  any read → ReferenceError
+   console.log(c); // ❌ ReferenceError│ │
+                                        │ │
+  var a = 1;                            │ │//  (var has no TDZ)
+  let b = 2;                            │ └─// TDZ ends for b here
+  const c = 3;                          │    //TDZ ends for c here
+
+  console.log(b);  // ✅ 2              │ b & c now initialized, safe to access
+  console.log(c);  // ✅ 3              │
+}                                       │ Scope ends
+*/
+
+// TDZ start → immediately when the block/function scope begins.
+
+// TDZ end → the moment the JavaScript engine executes the let or const declaration line.
+
+// Until TDZ ends, the binding exists but is not initialized, so any read access throws ReferenceError.
+
+//? Hoisting of let and const
+// Yes, they are hoisted during the Creation Phase —
+// the JavaScript engine allocates memory for their bindings before any code runs.
+
+// But unlike var, they are not initialized to undefined immediately.
+
+// Instead, they remain uninitialized in the Temporal Dead Zone (TDZ) —
+// the period between the start of the scope and the execution of their declaration line.
+
+// Accessing them in the TDZ throws a ReferenceError.
+
+//? 🔍 Lifecycle of let/const in Scope
+// Code
+// [ Creation Phase ]
+// - Name bound in the scope's Environment Record
+// - Value slot marked as <uninitialized>
+// - TDZ begins
+
+// [ Execution Phase ]
+// - When execution reaches the declaration:
+//     → Value is assigned
+//     → TDZ ends

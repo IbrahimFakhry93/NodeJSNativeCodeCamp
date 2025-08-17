@@ -7,6 +7,16 @@
 //* hoisting can't be applied on expression function
 //! if usage before declaration,
 
+//! Hoisting rules:
+//* Function declarations: fully hoisted (name + body) → callable anywhere in scope.
+//* Function expressions:
+//    - var: variable name hoisted, but value set later → undefined before assignment.
+//    - let/const: name hoisted but in TDZ → ReferenceError before assignment.
+//* Only declarations provide full pre-declaration call ability.
+//* Expressions can still be "hoisted" in name (var/let/const) but not in value.
+
+//^ look up the slides, very important
+
 //~ example:
 
 (function () {

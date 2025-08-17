@@ -72,6 +72,21 @@ console.log(allIndexes);
 //* substr
 //* charAt
 
+// let txt2 = "Hello, Hello, Ahmed";
+
+// exports.allIndexes = function (str, pattern) {
+//   let index = 0;
+//   let arr = [];
+
+//   for (let i = 0; i < str.length; i++) {
+//     index = str.indexOf(pattern, i);
+//     arr.push(index);
+//     i = index;
+//   }
+
+//   return arr;
+// };
+
 //*==============================================================================
 //! 38 – Strings – important functions – part 02
 

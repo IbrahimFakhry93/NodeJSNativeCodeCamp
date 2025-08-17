@@ -167,6 +167,30 @@ console.log(os.uptime() / 60 / 60); //* 6 giga
 //? 2. npm Publish
 //* Publishes the package to the npm registry for others to use (or for private access if specified).
 
+//~ other notes  I found
+//! 41 – NPM – install and publish packages
+
+//* npm is made to ease modules exchanging private or public
+
+//* for example ourMath module we copy it and paste to use in another folder
+//* so it can be considered as package to be used by anyone
+
+//* npm is consisted of:
+
+//* - register: database for all packages
+//* - npm website to explore the public packages
+
+//* packages can uploaded privately and apart of a team can access this package.
+
+//* you need account for npm publish
+
+//* cli is download automatically with node js
+
+//? steps to publish the package
+
+//* npm login: so npm registry knows which account to publish on
+//* npm publish
+
 //*================================================================
 
 //! 42 – Modules – ECMAScript Modules (ESM)
@@ -236,3 +260,5 @@ console.log(subtract(5, 3)); // Outputs: 2
 //* - Alternatively, use `"type": "module"` for ESM and the `import()` syntax dynamically for CJS:
 //& Example:
 const cjsModule = await import("./math.js"); // Dynamically load a CJS module in an ESM file
+
+//*================================================
