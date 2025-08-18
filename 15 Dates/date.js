@@ -1,9 +1,9 @@
 //~ Date Declaration:
 
 const d = new Date(); //*
-console.log(d); //* Sat Apr 12 2025 18:12:21 GMT+0200 (Eastern European Standard Time)  , fixed snapshot of the time of thils line code when it ran, it won't change with time
-console.log(d * 1); //*  1744474385133 Epoch value in ms
-console.log(d.toISOString());
+// console.log(d); //* Sat Apr 12 2025 18:12:21 GMT+0200 (Eastern European Standard Time)  , fixed snapshot of the time of thils line code when it ran, it won't change with time
+// console.log(d * 1); //*  1744474385133 Epoch value in ms
+// console.log(d.toISOString());
 
 // setInterval(() => {
 //   console.log(d);

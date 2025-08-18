@@ -72,21 +72,6 @@ console.log(allIndexes);
 //* substr
 //* charAt
 
-// let txt2 = "Hello, Hello, Ahmed";
-
-// exports.allIndexes = function (str, pattern) {
-//   let index = 0;
-//   let arr = [];
-
-//   for (let i = 0; i < str.length; i++) {
-//     index = str.indexOf(pattern, i);
-//     arr.push(index);
-//     i = index;
-//   }
-
-//   return arr;
-// };
-
 //*==============================================================================
 //! 38 – Strings – important functions – part 02
 
@@ -108,9 +93,32 @@ console.log(txt.replace(/\s/g, "")); //* Hello,Hello,Ahmed
 //*==============================================================================
 //! 39 – Strings – Template Literals
 
-//& tagged templates
+//? Template Literals:
+//* Allow us to do string interpolation (generation)
+//* make the part of the string dynamic.
+
+//* if we need to write backtick in the middle we need to escape by using \
+let txto = `call \`Mr. Martin      
+Carlos this morning`;
+
+//* if string start by a character must end with same character and if this character used in the middle , it needs to be escaped
+
+//^==============================================
+
+//? tagged templates and tag function
+
+//* we use tag function to manipulate (apply operations) on the template expression `${num}
+//* num here is the template expression`
+
+//^ check: tag function.pdf
+
+//* tag function extract the template expression and we can manipulate it as we want
 
 // tag function
+
+//* strings: array of all static strings in the passed string function parameter
+//* values: array of all template expressions
+
 function format(strings, ...values) {
   return `${strings[0]} ${values[0].toLocaleString()} ${strings[1]}`;
 }
@@ -152,7 +160,8 @@ function sql(strings, ...values) {
 // Imagine 'userInput' is a name provided through user input, which might contain harmful characters.
 const userInput = "O'Reilly";
 
-// Use the tag function to safely insert the input into an SQL query.
+// Use the tag function (sql) to safely insert the input into an SQL query.
+// we name the tag function here (sql)
 const query = sql`SELECT * FROM users WHERE name = ${userInput};`;
 
 console.log(query);
