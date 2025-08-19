@@ -3,3 +3,6 @@ const d = new Date("12 02 2024 17:03:42");
 //* Internally stored as milliseconds since UNIX Epoch in UTC.
 
 console.log(d.toString()); // Mon Dec 02 2024 17:03:42 GMT+0200 (Eastern European Standard Time)
+
+let start_date = new Date("1970-01-02");
+console.log(start_date);
