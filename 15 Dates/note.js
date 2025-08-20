@@ -151,6 +151,9 @@ console.log(shifted3h.toUTCString());
 //* Meet the long-awaited Temporal — designed to make time zone handling
 //* explicit and predictable, so you don’t run into “why did it change?” surprises.
 
+//^ note:
+//* During work, we don't rely on Date built-in object
+
 //^ but in this lecture, we will study the date object although it's about to end
 
 (function () {
@@ -278,42 +281,76 @@ console.log(shifted3h.toUTCString());
   const d3 = new Date(2024, 1, 12, 17, 3, 42); //* Explicit args (month 0‑based)
 })();
 
+//* elapsed Epoch == timestamp
+//* use timestamp better as an expression
+
 //*==============================================================
 
 //! 45 – Dates – Luxon module
 
+//* Luxon is a replacement of Date built-in object in JS
+//* Luxon provides more logic methods than JS Date object especially regarding formatting and timezone
+
+//* Luxon was before called moment.js
+
+//* open terminal on folder Lec45-Lux
+//* npm init to get package.json file
+//* npm install luxon
+//* open package.json and add: "type": "module" because we will use luxon module as esm
+
+//~ esm method
 import { DateTime, Interval } from "luxon";
+
+//? Formatting functions
 let now = DateTime.now();
-console.log(now.toString()); //* full date and time in IS0
-console.log(now.toISO()); //* same toString
-console.log(now.toISODate()); //* date only
-console.log(now.toISOTime()); //* time only
+console.log(now.toString()); //* full date and time in IS0 format
+console.log(now.toISO()); //* same as toString
+console.log(now.toISODate()); //* logs date only
+console.log(now.toISOTime()); //* logs time only
 
 console.log(now.toLocaleString());
+console.log(now.toLocaleString(DateTime.DATETIME_HUGE_WITH_SECONDS));
+console.log(now.toLocaleString(DateTime.DATETIME_MED_WITH_WEEKDAY));
+console.log(now.toLocaleString(DateTime.TIME_WITH_SECONDS));
 
 console.log(now.year);
 console.log(now.month); //* jan will be 1 , not zero index as in js
 console.log(now.day);
 console.log(now.zoneName);
 
+//* Check luxon documentation or moment github
+
 //? set function
 now = now.set({ year: 2030 });
 now = now.set({ month: 12 });
-console.log(now.toISO());
+now = now.set({ day: 29 });
+console.log(now.toISO()); //* to log full date and time in IS0 format, recall: toISO == toString
 
 //? calculation operations on dates
 
-now = now.plus({ months: 1 });
+now = now.plus({ months: 1 }); //* add one month to the date
 now = now.plus({ months: 13 });
 now = now.plus({ hours: 1 });
 now = now.plus({ minutes: 1 });
 
-let end = DateTime.fromISO("2024-05-14T10:10:10.000");
+//? Difference between two dates
+let end = DateTime.fromISO("2024-05-14T10:10:10.000"); //* 000: are the ms and they are placed after . not :
 let start = DateTime.fromISO("2024-02-21T10:10:10.000");
 
-let diff = end.diff(start);
-console.log(diff.as("months"));
-console.log(diff.as("days"));
+console.log(start.toISO()); //* start: 2024-02-21T10:10:10.000+02:00
+console.log(end.toISO()); //* end: 2024-05-14T10:10:10.000+03:00
+
+//! why start is plus 2 while end is plus 3?
+//* Because of Daylight saving time  (التوقيت الصيفي)
+//* In May, Egypt observes daylight saving time (summer time) by advancing clocks one hour.
+//* Luxon knows about that so it adds +3 as above
+
+let diff = end.diff(start); //* end - start
+console.log(diff); //* logs an object: diff is an object which called duration
+console.log(diff.as("months")); //* difference as months
+console.log(diff.as("days")); //* difference as days
+
+//^ open: luxon source code on github -> open: duration.js
 
 let interval = Interval.fromDateTimes(start, end);
 console.log(interval.length("months"));
@@ -325,12 +362,30 @@ console.log(start.toMillis());
 console.log(end.toMillis());
 console.log(start.toMillis() === end.toMillis());
 
-console.log(start.hasSame(end, "year"));
+console.log(start.hasSame(end, "year")); //* has same year, as start in 2024 and end also in 2024
 console.log(start.hasSame(end, "month"));
 
-//? if you done that in js as following you don't need libraries as Luxon:
+console.log(start.hasSame(end, "hour")); //* false, because all the previous units months and days are not the same as example above
+//* hasSame to give you true, all units previously must be the same
+
+//^====================================
+
+//? By doing this in plain JavaScript, you can format a date/time string
+//* similar to what date/time libraries (e.g., Luxon) produce, without
+//* actually importing any extra library.
+//
+//* toISOString() → gives "YYYY-MM-DDTHH:mm:ss.sssZ" in UTC.
+//* replace("T", " ") → swaps the 'T' separator for a space.
+//* replace("Z", "")  → removes the trailing 'Z' (UTC indicator).
+//
+//* Result: "YYYY-MM-DD HH:mm:ss.sss" in UTC, as a simple string.
 
 let d = new Date();
 console.log(d.toISOString().replace("T", " ").replace("Z", ""));
+
+//* Instead of using Luxon’s toFormat() or similar to get a clean YYYY-MM-DD HH:mm:ss.sss string,
+//* this one‑liner uses built‑in JS methods
+//* to get the same style of output
+//* (UTC time, ISO order, with a space instead of T and no timezone letter).
 
 //*========================================================
