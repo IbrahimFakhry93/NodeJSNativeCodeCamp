@@ -18,7 +18,7 @@ let i = 0;
 
 while (i < n()) {
   // console.log(i);
-  i++; //*  without this condition , it will cause infinity loop or stackoverflow
+  i++; //*  without this iteration , it will cause infinity loop or stackoverflow
 }
 // console.log("============================");
 for (let i = 0; i < n(); i++) {
@@ -34,7 +34,7 @@ function n() {
 while (n() !== 3) {
   console.log(n());
 }
-
+//! interview
 //* while is better when there is no need for counter
 
 console.log("============================");
@@ -72,4 +72,5 @@ do {
   input = prompt("write anything");
 } while (input != "q"); //* q for quit, the user exits the application
 
+//! interview
 //* while loop is a solution for loops that don't depend on counters

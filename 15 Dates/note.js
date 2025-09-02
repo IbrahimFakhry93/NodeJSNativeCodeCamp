@@ -13,7 +13,7 @@
 
 //* Unix Epoch is a system to represent a certain date
 
-//* Unix Epoch represents date info in a number which is count of seconds elapsed since 1 Jan 1970 24:00:00 (12 pm (midnight) on 1 Jan 1970)
+//* Unix Epoch value represents date info in a number which is count of seconds elapsed since 1 Jan 1970 24:00:00 (12 pm (midnight) on 1 Jan 1970)
 
 //* Unix is a name of a famous operating system which is developed in sixties in Bell Labs Company
 
@@ -31,6 +31,9 @@ console.log(start_date * 1); // 86400000: milliseconds since the UNIX epoch.
 //* Multiplication forces numeric type coercion.
 //* For Dates, numeric coercion calls .valueOf(), not .toString().
 //* Therefore date * 1, +date, or Number(date) all give you the timestamp in ms since epoch.
+
+//^ note:
+//* .valueOf(): Extract the primitive value from the Number object
 
 //^ note on Epoch value:
 //* Epoch value is different on apple os, it's 1/1/2001
@@ -148,7 +151,7 @@ console.log(shifted3h.toUTCString());
 
 //^ note:
 //* Date object is about to end.
-//* Meet the long-awaited Temporal — designed to make time zone handling
+//* Meet the long-awaited (Temporal) — designed to make time zone handling
 //* explicit and predictable, so you don’t run into “why did it change?” surprises.
 
 //^ note:
@@ -201,7 +204,7 @@ console.log(shifted3h.toUTCString());
   let start_date22 = new Date("20 FEB 2024 01:03:42");
   //* getDate() will get the day
   console.log(start_date22.getDate()); // 20   : getDate for local
-  console.log(start_date22.getUTCDate()); // 19 : getUTCDate for utc, timezone zero
+  console.log(start_date22.getUTCDate()); // 19 : getUTCDate for utc, timezone zero, because of hour 01:03:42 on 20 Feb
 
   start_date.setDate(25); //* 2024-02-25T15:03:42.000Z
 
@@ -235,7 +238,7 @@ console.log(shifted3h.toUTCString());
   console.log(date.getTime()); //* Epoch in ms from 1970
   console.log(date.getFullYear()); //* 2024
 
-  let date2 = new Date("12 02 2024 01:03:42"); //* 12 here is Month because this format we didn't write the month name as aove
+  let date2 = new Date("12 02 2024 01:03:42"); //* 12 here is Month because this format we didn't write the month name as above
   console.log(date2); //* Mon Dec 02 2024 01:03:42 GMT+0200 (Eastern European Standard Time)
 
   let date3 = new Date(" Hello the date is : 12 02 2024 01:03:42"); // the date is extracted from the text
@@ -334,8 +337,13 @@ now = now.plus({ hours: 1 });
 now = now.plus({ minutes: 1 });
 
 //? Difference between two dates
-let end = DateTime.fromISO("2024-05-14T10:10:10.000"); //* 000: are the ms and they are placed after . not :
 let start = DateTime.fromISO("2024-02-21T10:10:10.000");
+let end = DateTime.fromISO("2024-05-14T10:10:10.000"); //* 000: are the ms and they are placed after . not :
+
+let diff = end.diff(start); //* end - start
+console.log(diff); //* logs an object: diff is an object which called duration
+console.log(diff.as("months")); //* difference as months
+console.log(diff.as("days")); //* difference as days
 
 console.log(start.toISO()); //* start: 2024-02-21T10:10:10.000+02:00
 console.log(end.toISO()); //* end: 2024-05-14T10:10:10.000+03:00
@@ -344,11 +352,6 @@ console.log(end.toISO()); //* end: 2024-05-14T10:10:10.000+03:00
 //* Because of Daylight saving time  (التوقيت الصيفي)
 //* In May, Egypt observes daylight saving time (summer time) by advancing clocks one hour.
 //* Luxon knows about that so it adds +3 as above
-
-let diff = end.diff(start); //* end - start
-console.log(diff); //* logs an object: diff is an object which called duration
-console.log(diff.as("months")); //* difference as months
-console.log(diff.as("days")); //* difference as days
 
 //^ open: luxon source code on github -> open: duration.js
 

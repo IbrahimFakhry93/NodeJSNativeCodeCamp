@@ -6,7 +6,8 @@
 
 //* string is founded in 1988
 
-//* UTF-16 represent a single character in 16 bit (2 bytes)
+//* UTF-16 represents a single character in 16 bit (2 bytes)
+//* ex. A = 0000000001000001
 
 //* ask chatgpt unicode code point
 
@@ -65,12 +66,74 @@ function allIndexes(str, pattern) {
 const allIndexes = allIndexes("Hello, Hello, Ahmed", "Ahmed");
 console.log(allIndexes);
 
+//& Title: String Search Methods – Quick Examples & Memory Hook
+(() => {
+  const text = "Ahmed and Ahmed went to see Ahmed.";
+
+  //? search()
+  //* Finds the index of the first match for a regex pattern
+  console.log(text.search(/Ahmed/)); // → 0
+
+  //? match() with global flag
+  //* Returns array of all matches (strings only)
+  console.log(text.match(/Ahmed/g)); // → ["Ahmed", "Ahmed", "Ahmed"]
+
+  //? matchAll()
+  //* Returns iterable of match objects (with index info)
+  for (const m of text.matchAll(/Ahmed/g)) {
+    console.log(`"${m[0]}" at index ${m.index}`);
+  }
+
+  //? indexOf() loop
+  //* Finds all occurrences without regex
+  let idx = text.indexOf("Ahmed");
+  while (idx !== -1) {
+    console.log(`Found at index ${idx}`);
+    idx = text.indexOf("Ahmed", idx + 1);
+  }
+
+  //? 💡 Memory Hook:
+  //* Need regex + first index? → search()
+  //* Need all matches (strings only)? → match() + /g
+  //* Need all matches + indexes? → matchAll()
+  //* No regex, just substring search? → indexOf() (loop if needed)
+})();
+
 //* ask chatgpt for examples for these string methods:
 
 //* search method
 //* substring
 //* substr
 //* charAt
+
+//String Method Examples
+
+const text = "Hello, Ahmed!";
+
+//? search()
+//* Finds the index of the first match for a regex pattern.
+//* Returns -1 if not found.
+console.log(text.search(/Ahmed/)); //* → 7
+console.log(text.search(/hello/i)); //* → 0  (case-insensitive with /i flag)
+
+//? substring(start, end)
+//* Extracts characters from 'start' index up to (but not including) 'end' index.
+//* If 'end' is omitted, goes to the end of the string.
+console.log(text.substring(7, 12)); //* → "Ahmed"
+console.log(text.substring(0, 5)); //* → "Hello"
+
+//? substr(start, length)
+//* Extracts 'length' characters starting from 'start' index.
+//* NOTE: substr() is considered legacy but still works in many environments.
+console.log(text.substr(7, 5)); //* → "Ahmed"
+console.log(text.substr(0, 5)); //* → "Hello"
+
+//? charAt(index)
+//* Returns the character at the specified index.
+//* If index is out of range, returns an empty string.
+console.log(text.charAt(0)); //* → "H"
+console.log(text.charAt(7)); //* → "A"
+console.log(text.charAt(100)); //* → ""
 
 //*==============================================================================
 //! 38 – Strings – important functions – part 02
@@ -90,9 +153,38 @@ console.log(txt.replace(/\s/g, "")); //* Hello,Hello,Ahmed
 //* toUpperCase
 //* toLowerCase
 
+//& Title: String Methods – Whitespace Trimming & Case Conversion
+(() => {
+  const str = "   Hello, Ahmed!   ";
+
+  // trim()
+  // Removes whitespace from both the start and end of the string
+  console.log(str.trim()); // → "Hello, Ahmed!"
+
+  // trimStart()  (alias: trimLeft())
+  // Removes whitespace only from the start of the string
+  console.log(str.trimStart()); // → "Hello, Ahmed!   "
+
+  // trimEnd()  (alias: trimRight())
+  // Removes whitespace only from the end of the string
+  console.log(str.trimEnd()); // → "   Hello, Ahmed!"
+
+  const name = "ahmed";
+
+  // toUpperCase()
+  // Converts all characters to uppercase
+  console.log(name.toUpperCase()); // → "AHMED"
+
+  const shout = "HELLO WORLD";
+
+  // toLowerCase()
+  // Converts all characters to lowercase
+  console.log(shout.toLowerCase()); // → "hello world"
+})();
+
 //*==============================================================================
 //! 39 – Strings – Template Literals
-
+//! interview
 //? Template Literals:
 //* Allow us to do string interpolation (generation)
 //* make the part of the string dynamic.
@@ -101,10 +193,10 @@ console.log(txt.replace(/\s/g, "")); //* Hello,Hello,Ahmed
 let txto = `call \`Mr. Martin      
 Carlos this morning`;
 
-//* if string start by a character must end with same character and if this character used in the middle , it needs to be escaped
+//* if string start by a character (like single quote or double quote or backtick) must end with same character and if this character used in the middle , it needs to be escaped
 
 //^==============================================
-
+//! interview:
 //? tagged templates and tag function
 
 //* we use tag function to manipulate (apply operations) on the template expression `${num}
@@ -114,19 +206,20 @@ Carlos this morning`;
 
 //* tag function extract the template expression and we can manipulate it as we want
 
-// tag function
+//~ tag function
 
 //* strings: array of all static strings in the passed string function parameter
 //* values: array of all template expressions
 
 function format(strings, ...values) {
-  return `${strings[0]} ${values[0].toLocaleString()} ${strings[1]}`;
+  return `${strings[0]} ${values[0].toLocaleString()}${strings[1]}`;
 }
 
 let num = 988767334;
 
-console.log(format`The number is ${num}.`);
+console.log(format`The number is ${num}.`); // The number is  988,767,334.
 
+//*===================================================================================================================================
 //& Title: Using Tag Function for Safe SQL Query Construction in a Backend Application
 //? Note:
 //* This code demonstrates how to use a tag function called 'sql' to safely construct SQL query strings.
@@ -262,3 +355,4 @@ console.log("Safe Query:", safeQuery);
 //! 40 – Strings – Task – HTML scraping
 
 //^ open: ourMath folder
+//^ open: parse.js

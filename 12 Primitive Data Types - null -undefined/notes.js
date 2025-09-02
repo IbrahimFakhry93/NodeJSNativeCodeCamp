@@ -19,7 +19,10 @@
 //* symbol
 
 //*=====================================================
+
 //! 27 – Primitive Data Types – undefined, null
+
+//! interview
 
 //* undefined and null are primitive values
 //* undefined and null are similar with small differences
@@ -27,9 +30,11 @@
 
 //? null
 //* تعبر عن عدم وجود قيمة بشكل متعمد
+console.log(typeof null); // object
 
 //? undefined
 //* قيمة افتراضية لو لسه محددناش نوع الداتا للمتغير
+console.log(typeof undefined); // undefined
 
 console.log(null == undefined); //! true
 //* ==: compares values not data types, it makes type casting

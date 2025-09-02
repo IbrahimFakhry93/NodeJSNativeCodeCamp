@@ -1,8 +1,4 @@
-//* if statement
-
-//! Metwally Course
-
-//! Lec 56
+//! Lec 56 – Switch Statement
 
 //* switch statement is somehow similar to if else
 

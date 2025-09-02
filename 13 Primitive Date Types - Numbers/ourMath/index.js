@@ -19,12 +19,11 @@ exports.calcAvg = function (...nums) {
 //! Calc: Sets Union:
 
 //* Set === array in mathematics
-
-//~ my solution:
-
+//* a set is a collection of unique elements
+//* no duplication of elements
 /*
 
-- write two arrays = arr1 , arr2
+- write two arrays = arr1 , arr2 
 - function for union set
 - inputs: arr1, arr2
 - decl new union array = arr3
@@ -49,7 +48,7 @@ exports.unionSets = function (arr1, arr2) {
   return arr3;
 };
 
-//? or:
+//? or:  for the second loop
 
 // for (let i = 0; i < arr2.length; i++) {
 //   if (arr3.includes(arr2[i])) {
@@ -57,7 +56,6 @@ exports.unionSets = function (arr1, arr2) {
 //   }
 //   arr3.push(arr2[i]);
 // }
-//~ Metwally Solution:
 
 //*===========================================
 
@@ -89,7 +87,7 @@ exports.InterSets = function (arr1, arr2) {
 
 exports.maxNum = function (...nums) {
   let max = Number.MIN_SAFE_INTEGER; //* the bench mark
-  //?or:
+  //? or:
   //*  let max = Number.NEGATIVE_INFINITY
 
   for (let i = 0; i < nums.length; i++) {

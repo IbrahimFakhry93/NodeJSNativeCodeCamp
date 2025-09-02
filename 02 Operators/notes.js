@@ -89,7 +89,7 @@ console.log(y1); //* Output: 10
 //!  Lec 07 Operators – Arithmetic – hands-on
 
 //* Any operator is just a function that executes a behavior
-//* Operator is jut like a function, it must return a value
+//* Operator is just like a function, it must return a value
 
 //! Lec 08 Operators – Assignments
 
@@ -323,8 +323,8 @@ console.log("2" < "12"); // Output: false
 //* Explanation: Strings "2" and "12" are compared lexicographically. "2" comes after "1" in "12", so the result is false.
 
 // Example 4: Comparing different data types
-console.log(true < 1); // Output: true
-//* Explanation: The boolean value `true` is converted to 1. Since 1 is not less than 1, the result is true.
+console.log(true < 1); // Output: false
+//* Explanation: The boolean value `false` is converted to 1. Since 1 is not less than 1, the result is false.
 
 console.log(false < 1); // Output: true
 //* Explanation: The boolean value `false` is converted to 0. Since 0 is less than 1, the result is true.
@@ -467,7 +467,7 @@ if (isValid && heavyDutyFunction()) {
   console.log("Short-circuit occurred, heavy-duty function wasn't executed.");
 }
 
-//* Explanation:
+//? Explanation:
 //* - The `isValid` operand is placed first, and since it evaluates to false,
 //*   the second operand (heavyDutyFunction) is never executed due to short-circuiting.
 //* - This prevents unnecessary execution of time-consuming operations, making the code more efficient.

@@ -1543,130 +1543,26 @@ let html = `<div class="ld-item-list-item-preview">
 		
 	</div> <!--/.ld-item-list-item-preview-->`;
 
-//~==============================================================================================================================================
+//*==============
+
 /*
-
-* Task: to extract lesson names of the list
-  
-  <div class="ld-item-title">
-				01 &#8211; Prepare Development Environment
-  </div>
-  
-  //* to be like that:
-
-  	01 - Prepare Development Environment
-	02 - Node.js application files organization
-	03 - Variables
-	04 - Variables - hands-on
-	05 - Operators - Arithmetic
-	06 - Operators - Arithmetic - Priorities (order of operations)
-	07 - Operators - Arithmetic - hands-on
-	08 - Operators - Assignments
-	Exercises - 01
-	09 - Operators - Comparison
-	Exercises - 02
-
-
-  
-  ! required result = 01 - Prepare Development Environment
-  
-  
-  ? steps:
-  - start loop over html.length
-  - extract by substring  from "ld-item-title">
-				01 &#8211; Prepare Development Environment </div>
-  
-  - 
-
-  exports.scrapHtml = function (html) {
-  let htmlRes = 0;
-
-  for (let i = 0; i < html.length; i++) {}
-
-  return htmlRes;
-};
-
- //*======================
-
-
-
- ? Metwally steps:
-
-our target is the div with "ld-item-title" class
-find all divs with this class
-
-start loop
- -- find start index of "ld-item-title"
- -- find end index of </div>
- -- extract substring
- -- clean the substring
- -- replace html symbols with the real char
- -- add to result array
-end loop
-
-
-
-
-  */
-
-// <div class="ld-item-title">
-// 				01 &#8211; Prepare Development Environment
-// 			</div>
-
-let items = [];
-let startIndex = -1;
-let endIndex = -1;
-
-for (let i = 0; i < html.length; i++) {
-  startIndex = html.indexOf('"ld-item-title"', i);
-  //   console.log(startIndex);
-  if (startIndex === -1) break;
-  i = startIndex;
-  endIndex = html.indexOf("</div>", i);
-  if (endIndex === -1) break;
-  i = endIndex;
-
-  //   console.log(endIndex);
-  let extHtml = html.substring(startIndex, endIndex);
-
-  /*
-
 "ld-item-title">
 				01 &#8211; Prepare Development Environment
+  </div>
+*/
 
- */
+let s = 0;
+let e = 0;
+let pattern = '"ld-item-title">';
+for (let i = 0; i < html.length; i++) {
+  s = html.indexOf(pattern, i);
+  if (s == -1) break;
+  e = html.indexOf("<", s);
+  if (e == -1) break;
+  // const listName = html.substring(s + pattern.length + 1, e).trim();
+  //? or
+  const listName = html.substring(s, e).replace(pattern, "").trim();
 
-  extHtml = extHtml.replace('"ld-item-title">', "");
-  extHtml = extHtml.trim();
-
-  // 01 &#8211; Prepare Development Environment
-
-  extHtml = replaceSymbols(extHtml);
-
-  //   extHtml = extHtml.replaceAll("&#" + extChar + ";", char);
-
-  console.log(extHtml);
-
-  //   break;
-}
-
-function replaceSymbols(str) {
-  for (let i = 0; i < html.length; i++) {
-    startIndex = str.indexOf("&#");
-    if (startIndex === -1) break;
-    i = startIndex;
-    endIndex = str.indexOf(";");
-    if (endIndex === -1) break;
-    i = endIndex;
-
-    let extChar = str.substring(startIndex + 2, endIndex);
-    //   console.log(extChar);
-    uCode = "0x" + Number(extChar).toString(16);
-    //   console.log(uCode);
-    let char = String.fromCodePoint(extChar);
-
-    str = str.replaceAll("&#" + extChar + ";", char);
-  }
-
-  return str;
+  console.log(listName.replace(/&#8211;/g, "-"));
+  i = s;
 }

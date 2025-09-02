@@ -1,11 +1,12 @@
 //! 28 Data Types – numbers – IEEE 754
 
 //^ as in slide: 3.png
-//* Every number in JS is a floating point
+//* Every number in JS is a floating point ex. 1 is 1.0 in JS
 //* 3.14 is floating point number
 //* 3 is integer part
 //* .14 is decimal part
 
+//! interview
 //? In JavaScript, every number is a floating-point number under the hood
 //* Unless you're using the special BigInt type
 
@@ -25,6 +26,8 @@ console.log(0.1 + 0.2); // 0.30000000000000004 ❌ floating-point precision issu
 //* Binary floating-point can't precisely represent some decimal fractions
 
 console.log(0.1 + 0.2 === 0.3); // false ❌
+//~ in console:
+//* console.log(0.1 + 0.2);   0.30000000000000004
 
 //^ Reading Lecture( no need to study it in depth)
 
@@ -57,8 +60,10 @@ console.log(0.1 + 0.2 === 0.3); // false ❌
 
 //! 29 – Numbers – Object type Coercion – basics
 
+//! interview
 //* operations in computer are run or executed on binary version not decimal version
 
+//! interview
 //* processor execute any instructions in the code
 //^ for example"
 //* when sum two numbers, the summation operation is done by the cpu not the programming language
@@ -67,7 +72,8 @@ console.log(0.1 + 0.2 === 0.3); // false ❌
 
 //? Object type coercion example in JavaScript
 
-//~ Example 1: Applying a method directly to a primitive number
+//! interview
+//~ Example 1: Applying a method directly to a primitive number by applying object type coercion
 let x = 5.1234;
 console.log(x.toFixed(2)); // Output: 5.12
 //^ Explanation:
@@ -89,6 +95,7 @@ console.log(Number.parseFloat(y).toFixed(2)); // Output: 5.12
 //? also this works: without parseFloat
 console.log(Number(y).toFixed(2)); // Output: 5.12
 
+//! interview:
 //~ Why it works:
 //* Primitive data types in JavaScript (like numbers, strings, etc.) are automatically
 //* coerced into temporary wrapper objects (like Number, String, Boolean) when a method is applied.
@@ -112,11 +119,12 @@ console.log(Number(y).toFixed(2)); // Output: 5.12
   //~ to get multiplier of 3 for example
   for (let i = 1; i < 11; i++) {
     if (i % 3 === 0) {
-      console.log(`${i} , 3 multipliers`); // Output: Even number
+      console.log(`${i} , 3 multipliers`);
     }
   }
 })();
 
+//! interview
 //^ note on best practice:
 //* when declare a variable , initialize it with initial value to save some operations
 let num1 = 0;
@@ -127,7 +135,7 @@ let num1 = 0;
 //* that is useful for application will be run on cloud because every resource we consume. it will cost us a lot of money
 //* so try to save unnecessary operations
 
-//* on cloud, there will be many many users, so our code maybe will run a ot of times in only one second
+//* on cloud, there will be many many users, so our code maybe will run a lot of times in only one second
 
 //*============================================================================================================
 
@@ -142,13 +150,16 @@ let num1 = 0;
 //* 3 is integer part
 //* .14 is decimal part
 
+//! interview
 //? NaN is a special numeric value
+console.log(typeof NaN); //  number
 //* It represents an invalid number result (e.g., from failed parsing)
 //! mentor
 //* NaN !== NaN — it's the only value in JS that is not equal to itself
 
 console.log(NaN === NaN); // false ❌
 console.log(Number(undefined)); // NaN
+console.log(typeof undefined); // undefined
 
 //? Type coercion and parsing with Number()
 //* Number('unicorn') returns NaN — Not a Number
@@ -176,23 +187,26 @@ console.log(typeof null); // object
 //* 52 bits for the mantissa (representing a number between 0 and 1)
 
 //^======================================
-//! static properties
+//! interview
+//~ static properties
 //* allow us to use them directly without make instances of the object
+//* NaN is a static property
 
 console.log(Number.NaN == Number.NaN); //* false
 console.log(Number.NaN === Number.NaN); //* false
 //* NaN in binary has different values
 
 //*=========
-
+//! mentor: ask tem about the mess of this following
 //^ note:
 //* isNaN and isFinite are existed inside Number and global object
 //* and they have different behavior
 
-//* Number.isNaN doesn't do type coercion
-//* isNaN does type coercion
+//* Number.isNaN doesn't do type coercion  (number object)
+//* isNaN does type coercion                (global object)
 
 console.log(Number.isNaN(undefined)); //* false
+
 //~ global isNaN
 console.log(isNaN(undefined)); //* true
 //~ because isNaN in global is different than NaN in Number
@@ -209,7 +223,7 @@ console.log(isNaN(undefined)); //* true
 //* Number(undefined) → NaN → isNaN(NaN) → true
 
 //^ note: no different behavior regarding null
-console.log(Number.isNaN(mull)); //* false
+console.log(Number.isNaN(null)); //* false
 //~ global isNaN
 console.log(isNaN(null)); //* false
 
@@ -266,27 +280,27 @@ console.log(parseFloat("10.5")); // 10.5 ✅ full float
 
 //! instance properties
 
-// Instance properties are data or methods that belong to a specific object
-// created from a constructor (like new Number() or new Date()).
+//* Instance properties are data or methods that belong to a specific object
+//* which (the object) is created from a constructor (like new Number() or new Date()).
 
-// ✅ They are accessed only through the object, not the constructor itself.
-// ❌ Only instances (not primitives or constructors) have these properties directly.
+//* ✅ They are accessed only through the object, not the constructor itself.
+//* ❌ Only instances (not primitives or constructors) have these properties directly.
 
 //* technically, all instance methods are instance properties,
 
-//* toExponential is instance method
+//? example:
+//* toExponential convert a number into scientific notation
+//* toExponential is instance method, can't be accessed through the constructor (Number) directly
 
 (function () {
-  //* toExponential convert a number into scientific notation
-
-  console.log(Number.toExponential()); //! error toExponential is not a number
+  console.log(Number.toExponential()); //! error toExponential is not a function
 
   let x1 = new Number(12121121); //* x1 is Number object
-  console.log(x.toExponential());
+  console.log(x1.toExponential());
 
   //? or JS can apply type coercion
   let x2 = 12121121; //* x2 is primitive
-  console.log(x.toExponential()); //* 1.21212112e+6
+  console.log(x2.toExponential()); //* 1.21212112e+6
 })();
 
 //^===================
@@ -302,15 +316,18 @@ console.log(parseFloat("10.5")); // 10.5 ✅ full float
   // Round to 3 decimal places  (decimal part to be 3 numbers)
   console.log(x.toFixed(3)); // "12112.199"
 
-  // Format with 6 significant digits (all the number digits equals 3)
+  // Format with 6 significant digits (all the number digits equals 6)
   console.log(x.toPrecision(6)); // "12112.2"
-
+  //! interview
+  //^ note:
+  //* toFixed and toPrecision return string
   // Convert to string
   console.log(x.toString()); // "12112.1989"
 
   // Get primitive value (same as x)
   console.log(x.valueOf()); // 12112.1989
 
+  //! interview
   // Create a Number object (not primitive)
   // Create a Number object wrapper around the primitive 17
   let y = new Number(17);
