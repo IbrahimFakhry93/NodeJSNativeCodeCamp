@@ -1561,8 +1561,67 @@ for (let i = 0; i < html.length; i++) {
   if (e == -1) break;
   // const listName = html.substring(s + pattern.length + 1, e).trim();
   //? or
-  const listName = html.substring(s, e).replace(pattern, "").trim();
+  let listName = html.substring(s, e).replace(pattern, "").trim();
 
-  console.log(listName.replace(/&#8211;/g, "-"));
+  //   console.log(listName.replace(/&#8211;/g, "-"));
+  //   console.log(listName);
+  listName = replaceHTMLSymbol(listName);
+  console.log(listName);
+  //   break;
   i = s;
 }
+
+function replaceHTMLSymbol(str) {
+  for (let i = 0; i < str.length; i++) {
+    const s = str.indexOf("&", i);
+    if (s == -1) break;
+    const e = str.indexOf(";", s);
+    if (e == -1) break;
+    const code = str.substring(s + 2, e);
+    //console.log(code); //8211  (but as a string)
+    i = s;
+    //* convert this string code (8211) into utf so it needs "0x" at first (one of utf forms)
+    //* and this code which is normal decimal number should be converted to hexadecimal by (toString(16))
+    //* so this string code at first needs to be converted into number before conversion
+    //* then get
+    const uCode = "0x" + Number(code).toString(16);
+    // console.log(uCode); // 0x2013
+    const char = String.fromCodePoint(uCode);
+    // console.log(char);
+
+    str = str.replaceAll("&#" + code + ";", char);
+  }
+
+  return str;
+}
+
+//^ note:
+//* The String.fromCodePoint() static method returns a string created from the specified sequence of code points.
+
+function replaceHTMLSymbol2(str) {
+  for (let i = 0; i < str.length; i++) {
+    const s = str.indexOf("&", i);
+    if (s === -1) break;
+
+    const e = str.indexOf(";", s);
+    if (e === -1) break;
+
+    const code = str.substring(s + 2, e); // e.g., "8211"
+    i = s; // move index to start of entity
+
+    // Convert decimal string to number, then to character
+    const char = String.fromCodePoint(Number(code));
+
+    // Replace all occurrences of this entity
+    str = str.replaceAll(`&#${code};`, char);
+  }
+  return str;
+}
+
+// Example:
+console.log(replaceHTMLSymbol("Hello &#8211; world!"));
+// Output: Hello – world!
+
+//^ note:
+// No need for "0x" + ... step — you don’t need to manually convert to hex;
+// String.fromCodePoint(Number(code)) works directly for decimal HTML entities.

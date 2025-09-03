@@ -324,6 +324,11 @@ console.log(parseFloat("10.5")); // 10.5 ✅ full float
   // Convert to string
   console.log(x.toString()); // "12112.1989"
 
+  //^ note:
+  const code = "8211";
+  //* convert 8211 as decimal number into hexadecimal
+  Number(code).toString(16); //! toString is not static method
+
   // Get primitive value (same as x)
   console.log(x.valueOf()); // 12112.1989
 

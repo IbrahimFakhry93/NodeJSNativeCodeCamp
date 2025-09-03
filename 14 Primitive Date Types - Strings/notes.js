@@ -6,17 +6,31 @@
 
 //* string is founded in 1988
 
-//* UTF-16 represents a single character in 16 bit (2 bytes)
+//* UTF-16 system represents a single character in 16 bit (2 bytes)
+//* so to store one character in the memory we need 2 bytes
 //* ex. A = 0000000001000001
 
 //* ask chatgpt unicode code point
 
-//* different representation of (د) in hexadecimal (8.png)
+//* different representations of (د) in hexadecimal (8.png)
+//? different forms of hexadecimal:
+//* U+062f
+//* 0x062f
+//* \u062f
 
-//* every single emojis and egyptian hieroglyph stored as two characters
+//* official name of unicode is code point
 
 //* Most programming languages are based on utf - 16
 
+//* utf -32 : single character is 32 bit
+//* utf -8 : single character is 8 bit
+
+//* utf -32: any character is stored in the memory as 32 bit
+
+//* every single emojis and egyptian hieroglyph stored as two characters
+
+//* UTF-16 surrogate pairs: represent the character that is stored as two  (two code points)
+//* such as Music symbol (🎼)
 //*=====================================================================================
 //! 37 – Strings – important functions – part 01
 
@@ -356,3 +370,61 @@ console.log("Safe Query:", safeQuery);
 
 //^ open: ourMath folder
 //^ open: parse.js
+
+//^ note:
+//* The String.fromCodePoint() static method returns a string
+//* created from the specified sequence of code points.
+
+//& Title: HTML Symbols – Two Main Types
+
+// Named entity
+const named = "&copy;"; // © (copyright sign)
+
+// Numeric entity (decimal)
+const decimal = "&#169;"; // ©
+
+// Numeric entity (hexadecimal)
+const hex = "&#x00A9;"; // ©
+
+// Decode in browser using DOM
+function decodeHtml(str) {
+  const el = document.createElement("textarea");
+  el.innerHTML = str;
+  return el.value;
+}
+
+console.log(decodeHtml(named)); // → ©
+console.log(decodeHtml(decimal)); // → ©
+console.log(decodeHtml(hex)); // → ©
+
+//& Title: Universal HTML Entity Decoder
+function decodeHtmlEntities(str) {
+  return str.replace(/&(#x?[0-9a-fA-F]+|\w+);/g, (match, entity) => {
+    // Numeric (decimal)
+    if (entity.startsWith("#") && !entity.startsWith("#x")) {
+      return String.fromCodePoint(Number(entity.slice(1)));
+    }
+    // Numeric (hexadecimal)
+    if (entity.startsWith("#x") || entity.startsWith("#X")) {
+      return String.fromCodePoint(parseInt(entity.slice(2), 16));
+    }
+    // Named entity (browser-safe fallback)
+    if (typeof document !== "undefined") {
+      const el = document.createElement("textarea");
+      el.innerHTML = match;
+      return el.value;
+    }
+    // Named entity in Node.js (requires 'he' library for full coverage)
+    try {
+      const he = require("he");
+      return he.decode(match);
+    } catch {
+      return match; // leave unchanged if no decoding method available
+    }
+  });
+}
+
+// Example usage:
+const html = "Hello &copy; 2025 &#169; &#x00A9; and &#8211; dash";
+console.log(decodeHtmlEntities(html));
+// → Hello © 2025 © © and – dash
