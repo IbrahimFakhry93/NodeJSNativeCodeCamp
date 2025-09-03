@@ -99,19 +99,14 @@ function getYearDifference(date1, date2) {
 // [8] lang code
 // [6] country code
 
-// const date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
-
-// // An application may want to use UTC and make that visible
-// const options = { timeZone: "UTC+5", hour12: false };
-// console.log(date.toLocaleTimeString("en-US", options));
-// // "3:00:00 AM GMT"
-
-// // Sometimes even the US needs 24-hour time
-// console.log(date.toLocaleTimeString("en-US", { hour12: false }));
-// // "19:00:00"
-
-// // Show only hours and minutes, use options with the default locale - use an empty array
-// console.log(
-//   date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-// );
-// // "20:01"
+//^ look up:  formatData
+//? why this issue:
+//* ,41male,Cull Digweed,cdigweedh@newsvine.com,1984/11/5,17:10:00,CN,China,zh,UTC+8
+//! because:
+// \r = carriage return
+// Moves cursor to start of current line without advancing to next line.
+// In console output, text after \r overwrites what came before on the same line.
+// Common in Windows line endings: "\r\n"
+// If \r is in the middle of a string (e.g., "UTC+5\r,44"), it causes overwrite effect.
+//* ✅ Fix: strip it before processing
+lineData = lineData.replace(/\r/g, ""); // or .trimEnd()
