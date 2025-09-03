@@ -43,6 +43,11 @@ fs.readFile(csvFilePath, "utf8", (err, data) => {
     return;
   }
   data = manipulateData(data);
+  //* Asynchronous version (recommended for non-blocking operations)
+  fs.writeFile("newCSV_file.csv", data, (err) => {
+    if (err) throw err;
+    console.log("File saved!");
+  });
 
   console.log(data);
 });
@@ -50,7 +55,7 @@ fs.readFile(csvFilePath, "utf8", (err, data) => {
 function manipulateData(data) {
   const arrData = data.split("\n");
   // console.log(arrData);
-  const newArrData = arrData.map(formatData).join("\n");
+  const newArrData = arrData.map(formatData).join("\n\n");
 
   return newArrData;
 }
@@ -70,7 +75,14 @@ function formatData(lineData) {
   const age = getYearDifference(refDate, birthDate);
   // console.log("age: " + age);
   dataArr[dataArr.length] = age;
-  const dataString = dataArr.join(",");
+  const dataString = ` ${dataArr[0]} - ${dataArr[2]} is born in ${
+    dataArr[7]
+  } on ${dataArr[4]} at ${dataArr[5]}
+${
+  dataArr[1] === "male" ? "his" : "her"
+} age in october 2025 will be almost ${age} years
+${dataArr[1] === "male" ? "his" : "her"} contact information: ${dataArr[3]}
+`;
   return dataString;
 }
 
