@@ -3,6 +3,32 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+/* 
+
+- read file and assign file data to string variable
+- split the data by end of line '\n'
+- loop for each line (for each person)
+- - split the line data by ','
+- - use country and language code along with timezone to format the birth date
+- - calculate the age
+- - add the age to the person data
+- - construct the final paragraph
+- - append paragraph to string variable
+- write new file
+
+*/
+
+/*
+required output paragraph:
+
+" id - name is born in country on local_datetime
+his/her age in october 2025 will be almost diff years
+his/her contact information: email
+
+"
+
+*/
+
 // __dirname replacement in ESM
 const __filename = fileURLToPath(import.meta.url);
 console.log(__filename);
@@ -23,24 +49,37 @@ fs.readFile(csvFilePath, "utf8", (err, data) => {
 
 function manipulateData(data) {
   const arrData = data.split("\n");
-
-  function formatData(lineData) {
-    const dataArr = lineData.split(",");
-    const date = new Date(dataArr[4] + " " + dataArr[5]);
-    const options = { hour12: false };
-
-    dataArr[5] = date.toLocaleTimeString(
-      `${dataArr[8]}-${dataArr[6]}`,
-      options
-    );
-    dataArr[4] = date.toLocaleDateString(`${dataArr[8]}-${dataArr[6]}`);
-
-    return dataArr;
-  }
-
+  // console.log(arrData);
   const newArrData = arrData.map(formatData).join("\n");
+
   return newArrData;
 }
+
+function formatData(lineData) {
+  const dataArr = lineData.replace(/\r$/, "").split(",");
+  const birthDate = new Date(dataArr[4] + " " + dataArr[5]);
+  const options = { hour12: false };
+
+  dataArr[5] = birthDate.toLocaleTimeString(
+    `${dataArr[8]}-${dataArr[6]}`,
+    options
+  );
+  dataArr[4] = birthDate.toLocaleDateString(`${dataArr[8]}-${dataArr[6]}`);
+  const refDate = new Date("01 october 2025");
+  refDate.toLocaleDateString(`${dataArr[8]}-${dataArr[6]}`);
+  const age = getYearDifference(refDate, birthDate);
+  // console.log("age: " + age);
+  dataArr[dataArr.length] = age;
+  const dataString = dataArr.join(",");
+  return dataString;
+}
+
+function getYearDifference(date1, date2) {
+  const year1 = date1.getFullYear();
+  const year2 = date2.getFullYear();
+  return Math.abs(year1 - year2).toString();
+}
+
 // [4] date
 // [5] time
 // [9] timezone
