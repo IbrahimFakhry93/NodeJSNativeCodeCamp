@@ -37,6 +37,7 @@ console.log(__dirname);
 
 const csvFilePath = path.join(__dirname, "MOCK_DATA.csv");
 
+//* without "utf8", data will be received as binary
 fs.readFile(csvFilePath, "utf8", (err, data) => {
   if (err) {
     console.error("Error reading the file:", err);
@@ -60,8 +61,8 @@ function manipulateData(data) {
   return newArrData;
 }
 
-function formatData(lineData) {
-  const dataArr = lineData.replace(/\r$/, "").split(",");
+function formatData(personData) {
+  const dataArr = personData.replace(/\r$/, "").split(",");
   const birthDate = new Date(dataArr[4] + " " + dataArr[5]);
   const options = { hour12: false };
 
@@ -70,11 +71,16 @@ function formatData(lineData) {
     options
   );
   dataArr[4] = birthDate.toLocaleDateString(`${dataArr[8]}-${dataArr[6]}`);
+
+  console.log(dataArr[4]);
   const refDate = new Date("01 october 2025");
   refDate.toLocaleDateString(`${dataArr[8]}-${dataArr[6]}`);
+
   const age = getYearDifference(refDate, birthDate);
+
   // console.log("age: " + age);
   dataArr[dataArr.length] = age;
+
   const dataString = ` ${dataArr[0]} - ${dataArr[2]} is born in ${
     dataArr[7]
   } on ${dataArr[4]} at ${dataArr[5]}
@@ -109,4 +115,15 @@ function getYearDifference(date1, date2) {
 // Common in Windows line endings: "\r\n"
 // If \r is in the middle of a string (e.g., "UTC+5\r,44"), it causes overwrite effect.
 //* ✅ Fix: strip it before processing
-lineData = lineData.replace(/\r/g, ""); // or .trimEnd()
+// personData = personData.replace(/\r/g, ""); // or .trimEnd()
+
+//! using the debugger:
+//* set breakpoint, by hover over the line and click on the red point
+//* run the code, it will run till just right before the red point
+//* click continue to run the rest of the code
+
+//* if you set breakpoint at aline which will be the end of an iteration (last line of loop block)
+//* to navigate through the loops you have options:
+//* step in, if there is inner function that is called of another file, it will open that file
+//* step over, to run the iteration without open extra files
+//* continue, it will navigate through the iteration without enter the inner block of the loop
