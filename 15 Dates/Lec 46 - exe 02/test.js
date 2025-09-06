@@ -38,6 +38,7 @@ console.log(__dirname);
 const csvFilePath = path.join(__dirname, "MOCK_DATA.csv");
 
 //* without "utf8", data will be received as binary
+//* readFileSync is asynchronous
 fs.readFile(csvFilePath, "utf8", (err, data) => {
   if (err) {
     console.error("Error reading the file:", err);

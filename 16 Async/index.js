@@ -17,6 +17,7 @@ function doSomething(done, err) {
   }
 }
 
+//* passing success, failure as a parameters
 // doSomething(success, failure);
 
 //*=========================================================================
@@ -35,6 +36,7 @@ function avg_callback(num) {
 //* and this module call this callback function
 //*=========================================================================
 
+//^ open: data.txt
 //? callback inline, possible but less readable
 //* better to define the callback function separately and then pass its name without ()
 
@@ -51,95 +53,90 @@ function avg_callback(num) {
 
 // Asynchronous nature of node js  //* executed behind the scenes because readFile is async
 //*=========================================================================
+(function () {
+  //^open: 1.txt (contain large data) ,2.txt, 3.txt
 
-//& Ex:
-
-// console.log("Read 1.txt");
-
-// fs.readFile("./1.txt", { encoding: "utf8" }, function (err, data) {
-//   if (err) {
-//     console.log(err);
-//   } else console.warn("first document");
-// });
-
-// console.log("Read 2.txt");
-
-// fs.readFile("./2.txt", { encoding: "utf8" }, function (err, data) {
-//   if (err) {
-//     console.log(err);
-//   } else console.warn(data);
-// });
-// console.log("Read 3.txt");
-
-// fs.readFile("./3.txt", { encoding: "utf8" }, function (err, data) {
-//   if (err) {
-//     console.log(err);
-//   } else console.warn(data);
-// });
-
-// console.log("done");
-
-//^ in console:
-// Read 1.txt
-// Read 2.txt
-// Read 3.txt
-// done
-// third document
-// second document
-// first document
-
-//* first document printed at last, because the document is very big
-
-//*=========================================================================
-
-//& Ex: to make this i/o operations above to run in sequence
-//* using concept of callback, but the operation will be slower than above
-
-function readFirst() {
+  //& Ex:
   console.log("Read 1.txt");
   fs.readFile("./1.txt", { encoding: "utf8" }, function (err, data) {
     if (err) {
       console.log(err);
-    } else {
-      console.warn("first document");
-      readSecond();
-    }
+    } else console.warn("first document");
   });
-}
-
-function readSecond() {
   console.log("Read 2.txt");
-
   fs.readFile("./2.txt", { encoding: "utf8" }, function (err, data) {
     if (err) {
       console.log(err);
-    } else {
-      console.warn("first document");
-      readThird();
-    }
+    } else console.warn(data);
   });
-}
-
-function readThird() {
   console.log("Read 3.txt");
-
   fs.readFile("./3.txt", { encoding: "utf8" }, function (err, data) {
     if (err) {
       console.log(err);
     } else console.warn(data);
   });
-}
+  console.log("done");
+  //^ in console:
+  // Read 1.txt
+  // Read 2.txt
+  // Read 3.txt
+  // done
+  // third document
+  // second document
+  // first document
+  //! first document printed at last, because the document is very big
+})();
 
-// readFirst();
+//*=========================================================================
+(function () {
+  //& Ex: to make this i/o operations above to run in sequence
+  //* using concept of callback, but the operation will be slower than above
 
-//^ in console:
-// Read 1.txt
-// first document
-// Read 2.txt
-// first document
-// Read 3.txt
-// third document
+  function readFirst() {
+    console.log("Read 1.txt");
+    fs.readFile("./1.txt", { encoding: "utf8" }, function (err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.warn("first document");
+        readSecond();
+      }
+    });
+  }
 
+  function readSecond() {
+    console.log("Read 2.txt");
+
+    fs.readFile("./2.txt", { encoding: "utf8" }, function (err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.warn("first document");
+        readThird();
+      }
+    });
+  }
+
+  function readThird() {
+    console.log("Read 3.txt");
+
+    fs.readFile("./3.txt", { encoding: "utf8" }, function (err, data) {
+      if (err) {
+        console.log(err);
+      } else console.warn(data);
+    });
+  }
+
+  // readFirst();
+
+  //^ in console:
+  // Read 1.txt
+  // first document
+  // Read 2.txt
+  // first document
+  // Read 3.txt
+  // third document
+})();
 //*=========================================================================
 
 //& nextTick:
@@ -147,6 +144,8 @@ function readThird() {
 //* nextTick is async function
 //* nextTick is used to register callback function that will be called later
 //* not like readFile for example when reading file finished, it calls the callback
+
+//* nextTick is being called of global object (process)
 
 //? NextTick and setImmediate:
 //* process the nextTick() is a function that we can use when we really, really need
@@ -167,8 +166,36 @@ function readThird() {
 // nextTick
 
 //* callback function won't be called or executed randomly
+
+//^=======================================================================
+///& ex:
+(function () {
+  console.log("1");
+  process.nextTick(function () {
+    console.warn("nextTick 1");
+  });
+  for (let i = 2; i < 101; i++) {
+    console.log(i);
+  }
+  process.nextTick(function () {
+    console.warn("nextTick 2");
+  });
+})();
+
+//! console:
+//* 1
+//* the loop iterations results
+//* nextTick 1
+//* nextTick 2
+
+//! important info:
+//* asynchronous code or callbacks will be executed only after all sync code has been executed
+
 //*=========================================================================
 
+//? promise:
+//* promise is a javascript feature existed in browsers and node js
+//* promise is async statement same as nextTick or readFile
 Promise.resolve().then(function () {
   console.warn("promise");
 });
@@ -213,4 +240,5 @@ Promise
 //* promise is similar to nextTick that it registers callback
 //* promise is used to execute chain of events right after another
 
-//* not all callbacks have the same priority of execution
+//* not all callbacks have the same priority of execution, so as you note above:
+//* promise is executed after nextTick

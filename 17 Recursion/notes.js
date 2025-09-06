@@ -81,6 +81,11 @@ console.log("============================================");
   console.log(data);
 })();
 
+//* this code will work on any levels of nested arrays in the external array arr, and that's where recursion excels
+//? or
+//* This code can handle arrays nested to any depth within the outer array `arr` — a scenario where recursion truly shines.
+
+//! interview
 //* Recursion has a cost on the account of memory
 ("Recursion comes with a memory overhead because each recursive call stores its state on the call stack until it completes.");
 ("Recursion increases memory usage because each recursive call adds a new frame to the call stack until the process is resolved.");

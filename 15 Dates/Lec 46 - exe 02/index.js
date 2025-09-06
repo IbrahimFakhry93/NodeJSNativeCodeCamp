@@ -67,6 +67,7 @@ his/her contact information: email
 import { DateTime, Interval } from "luxon";
 import * as fs from "fs";
 
+//* readFileSync is synchronous
 let data = fs.readFileSync("./MOCK_DATA.csv", { encoding: "utf8", flag: "r" });
 
 // console.log(data);

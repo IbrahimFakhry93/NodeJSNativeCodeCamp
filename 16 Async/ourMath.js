@@ -1,3 +1,5 @@
+//^ note:
+//* rest parameter must be the last parameter
 exports.calcAvg = function (cb, ...nums) {
   let sum = 0;
   for (let i = 0; i < nums.length; i++) {
