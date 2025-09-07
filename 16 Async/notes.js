@@ -184,9 +184,10 @@ if not, it continues checking without stopping.
 
 //! 52 – Asynchronous – Flow Control Patterns .. and more.
 
-//& Patterns to execute asynchronous code:
+//& Patterns to write asynchronous code:
 
 //? In Series nested callbacks
+//* suitable when the nested operations are different such as (read file then write file then read file and so on)
 
 let fs = require("fs");
 
@@ -211,10 +212,11 @@ fs.readFile("./01.txt", { encoding: "utf-8" }, function (err, data) {
 // new_01.txt created.
 // 02.txt read.
 // new_02.txt created.
-
+//^==========================================================================
 //? In Series recursion:
+//* It's suitable for a single operations but on different data
 
-let array = ["one", "two", "three", "four", "five"];
+let array = ["one", "two", "three", "four", "five"]; //* array of filenames
 let result = [];
 
 function final() {
@@ -248,7 +250,7 @@ recursive(array.shift());
 //* We used recursive asynchronous approach above instead of loop,
 //* because loop by nature is sync code, so it doesn't guarantee the readFile process to be executed in sequence or in order
 //^==================================================================================
-//? In parallel: Sync loop:
+//? In parallel: we can use Sync loop:
 (function () {
   let array = ["one", "two", "three", "four", "five"];
 
@@ -292,5 +294,111 @@ recursive(array.shift());
   recursive();
 })();
 
-//* max =3; it's the limit so not more than three callbacks (three timers in our example) are open at the same time
+//* max = 3; it's the limit so not more than three callbacks (three timers in our example) are open at the same time
 //* started is a counter to store in the number of open callbacks at the same time
+//^==================================================================================
+//? Limited in parallel: but with using var instead of let:
+
+(function () {
+  let array = ["one", "two", "three", "four", "five"];
+  let max = 3;
+  let started = 0;
+
+  function recursive() {
+    while (array.length > 0 && started < max) {
+      started++;
+      var item = array.shift();
+      setTimeout(() => {
+        console.log(item);
+        started--;
+        recursive();
+      }, 1000);
+    }
+  }
+
+  recursive();
+})();
+
+//! console:
+//* Output after 1 second:
+// three
+// three
+// three
+
+//! solution:
+
+//^ check: 05 Solutions for var for our example in Lec52 PDFs
+//* 1 IIFE Closure Fix
+(function () {
+  let array = ["one", "two", "three", "four", "five"];
+  let max = 3;
+  let started = 0;
+
+  function recursive() {
+    while (array.length > 0 && started < max) {
+      started++;
+      var item = array.shift();
+
+      (function (current) {
+        setTimeout(() => {
+          console.log(current);
+          started--;
+          recursive();
+        }, 1000);
+      })(item);
+    }
+  }
+
+  recursive();
+})();
+
+//? or
+
+//* 2 Pass Value as Argument to setTimeout
+(function () {
+  let array = ["one", "two", "three", "four", "five"];
+  let max = 3;
+  let started = 0;
+
+  function recursive() {
+    while (array.length > 0 && started < max) {
+      started++;
+      var item = array.shift();
+
+      setTimeout(
+        (val) => {
+          console.log(val);
+          started--;
+          recursive();
+        },
+        1000,
+        item
+      );
+    }
+  }
+
+  recursive();
+})();
+
+//* 3 pass as argument using helper function, we name it async
+(function () {
+  let fs = require("fs");
+
+  let array = ["one", "two", "three", "four", "five"];
+
+  function async(item) {
+    // <-- new scope + parameter
+    setTimeout(() => {
+      console.log(item); // closes over parameter, not shared var
+    }, 1000);
+  }
+
+  function recursive() {
+    while (array.length > 0) {
+      var item = array.shift();
+      async(item);
+    }
+  }
+
+  recursive();
+})();
