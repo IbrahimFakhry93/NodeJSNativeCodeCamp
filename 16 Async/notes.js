@@ -296,6 +296,14 @@ recursive(array.shift());
 
 //* max = 3; it's the limit so not more than three callbacks (three timers in our example) are open at the same time
 //* started is a counter to store in the number of open callbacks at the same time
+
+// t=0s: Start (start setTimeout timer) "one", "two", "three" (started=3)
+// t=1s: "one" done → start "four"
+//       "two" done → start "five"
+//       "three" done → nothing left
+// t=2s: "four" done
+//       "five" done
+
 //^==================================================================================
 //? Limited in parallel: but with using var instead of let:
 
