@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-//* build the executor fot the Promise class
+//* build the executor for the Promise class
 function read_customer_id(resolve, reject) {
   fs.readFile("./current_customer.txt", "utf-8", function (err, data) {
     if (err) reject(err);
@@ -18,10 +18,10 @@ function failure(err) {
   console.error(err.message);
 }
 
-// read_customer_id(success, failure);
+//read_customer_id(success, failure);
 
 //* pass resolve and reject through then method
-// new Promise(read_customer_id).then(success, failure);
+new Promise(read_customer_id).then(success, failure);
 
 //* run the code it will have the same result of this line:  read_customer_id(success, failure);
 
@@ -41,10 +41,10 @@ let promise1 = new Promise(read_customer_id);
 /*
 
 
-//* Promise {[[PromiseState]]: 'pending', [[PromiseResult]]: undefined, Symbol(async_id_symbol): 7, Symbol(trigger_async_id_symbol): 5}
+* Promise {[[PromiseState]]: 'pending', [[PromiseResult]]: undefined, Symbol(async_id_symbol): 7, Symbol(trigger_async_id_symbol): 5}
 
-read file successfully
-010101010100o01eft
+*  read file successfully
+*  010101010100o01eft
 
 
 */
@@ -76,10 +76,10 @@ function last() {
   console.log("last");
 }
 
-// new Promise(read_customer_id)
-//   .then(success, failure)
-//   .then(another, failure)
-//   .then(last, failure);
+new Promise(read_customer_id)
+  .then(success, failure)
+  .then(another, failure)
+  .then(last, failure);
 
 /*
 

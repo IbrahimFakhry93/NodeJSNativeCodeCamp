@@ -108,6 +108,10 @@ read();
   //* writeFileSync pauses the main thread or the main stack
 })();
 
+//! Async Approach:
+
+//^ check: writeFile vs fs.promises.writeFile.pdf
+
 //? writeFile
 
 (function () {
@@ -127,16 +131,17 @@ read();
 //* if it's function so it expects callback
 //* if it's object so it expects options such as mode, flag
 
-//? write file with promises
+//? write file with promises and then method and catch method
 
 (function () {
   const file_name = "new_file.txt";
 
   // fs.writeFile(file_name, "content محتوى", "utf-8", (err) => {});
-  //* with object options
-  fs.promises.writeFile(file_name, "content محتوى").then(() => {
-    console.log("file is written");
-  }, console.error(err.message));
+
+  fs.promises
+    .writeFile(file_name, "content محتوى")
+    .then(() => console.log("file is written"))
+    .catch((err) => console.error(err.message));
 })();
 
 //? write file with async
@@ -147,7 +152,7 @@ read();
       const file_name = "new_file.txt";
 
       // fs.writeFile(file_name, "content محتوى", "utf-8", (err) => {});
-      //* with object options
+
       await fs.promises.writeFile(file_name, "content محتوى");
     } catch (err) {
       console.error(err.message);
