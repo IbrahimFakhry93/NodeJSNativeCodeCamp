@@ -34,6 +34,7 @@
 //~ Router:
 //* router:  network gate after modem
 //* it receives data that relates to its connected network and refuse other data
+
 //& Title: Understanding the Role of a Router
 
 //? 1. What is a Router?
@@ -78,13 +79,15 @@
 
 //~ Repeater:
 //* Strengthen the signal in network cable
-//* it is rare to use in home
+//* it is rare to use at home
 //^================================================================================================
 
 //& OSI Model:
 
+//* OSI: open system interconnection
+
 //* OSI standardizes networking functions into seven layers.
-//*  It organizes how data moves from one device to another across a network
+//* It organizes how data moves from one device to another across a network
 
 //* OSI has standard
 //* OSI exists in every device (pc, mobile, server)

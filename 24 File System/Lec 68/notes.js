@@ -8,19 +8,19 @@ fs = require("fs");
 const file_name = "new_file.txt";
 //* \n: new line
 
-// fs.appendFile(file_name, "\nnew line", (err) => {
-//   if (err) console.log(err);
-//   else console.log("file is written");
-// });
+fs.appendFile(file_name, "\nnew line", (err) => {
+  if (err) console.log(err);
+  else console.log("file is written");
+});
 
 //& append file with promise
 
-// fs.promises.appendFile(file_name, "another new line \n", "utf-8").then(
-//   () => {
-//      console.log("file is written");
-//   },
-//   (err) => console.log(err)
-// );
+fs.promises
+  .appendFile(file_name, "another new line \n", "utf-8")
+  .then(() => {
+    console.log("file is written");
+  })
+  .catch((err) => console.log(err));
 
 //& append file with async/await
 
@@ -33,7 +33,7 @@ async function append() {
   }
 }
 
-// append();
+append();
 
 //*===================================================================
 
@@ -43,27 +43,28 @@ async function append() {
 //* read the file part by part (part by part as stream)
 
 //^ create reader object and it's event too
-// let reader = fs.createReadStream(file_name, {
-//   encoding: "utf-8",
-//   highWaterMark: 3, // default 64K
-// });
+let reader = fs.createReadStream(file_name, {
+  encoding: "utf-8",
+  highWaterMark: 3, // default 64K
+});
 
 //* highWaterMark: represents number of characters to be read at one time
 
-// reader.on("data", (chunk) => {
-//   console.log(chunk);
-//   console.log("=========================================");
-// }); //* emit events after finish reading
+//~ data is event
+reader.on("data", (chunk) => {
+  console.log(chunk);
+  console.log("=========================================");
+}); //* emit events after finish reading
 
-// reader.on("error", (err) => {
-//   console.error(err);
-// });
+reader.on("error", (err) => {
+  console.error(err);
+});
 
 //* when finishing reading
 //* at the end of stream
-// reader.on("close", () => {
-//   console.log("read stream is closed");
-// });
+reader.on("close", () => {
+  console.log("read stream is closed");
+});
 
 //*======================================================================================================================================================
 

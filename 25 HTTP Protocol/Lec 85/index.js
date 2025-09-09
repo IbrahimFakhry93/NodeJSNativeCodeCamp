@@ -12,7 +12,7 @@
 //* most famous http client is postman
 
 //* software experts decided that credentials must be sent in every http request
-///* but not the password, as security issue even if the password is encrypted
+//* but not the password, as security issue even if the password is encrypted
 //* because there may be a hacker who has the key to decrypt the password
 
 //* so we send token instead of password as credentials

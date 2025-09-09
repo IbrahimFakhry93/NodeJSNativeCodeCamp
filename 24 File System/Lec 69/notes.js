@@ -11,43 +11,43 @@ const file_name = "new_file.txt1";
 
 //^ create exists.txt
 
-// fs.stats(file_name, (err, stats) => {
-//   console.log(stats); //* stats hold information about the file
-//   console.log(stats.isFile()); //* true
-//   console.log(stats.isDirectory()); //* false: it's not directory ,not folder
-// });
+fs.stats(file_name, (err, stats) => {
+  console.log(stats); //* stats hold information about the file
+  console.log(stats.isFile()); //* true
+  console.log(stats.isDirectory()); //* false: it's not directory ,not folder
+});
 
 //^ according to Node JS documentation
-// Using `fs.stat()` to check for the existence of a file before calling `fs.open()`,
-// `fs.readFile()`, or `fs.writeFile()` is not recommended.
-// Instead, user code should open/read/write the file directly and handle the error
-// raised if the file is not available.
+//* Using `fs.stat()` to check for the existence of a file before calling `fs.open()`,
+//* `fs.readFile()`, or `fs.writeFile()` is not recommended.
+//* Instead, user code should open/read/write the file directly and handle the error
+//* raised if the file is not available.
 
 //^ so use this instead:
 
-// fs.readFile(file_name, "utf-8", (err, data) => {
-//   if (err) {
-//     if (err.message.includes("no such file or directory"))
-//       console.error("file doesn't exist");
-//     else console.error(err);
-//   } else console.log(data);
-// });
+fs.readFile(file_name, "utf-8", (err, data) => {
+  if (err) {
+    if (err.message.includes("no such file or directory"))
+      console.error("file doesn't exist");
+    else console.error(err);
+  } else console.log(data);
+});
 
-// fs.readFile(file_name, "utf-8", (err, data) => {
-//   (err && err.message.includes("no such file or directory")
-//     ? !console.err("file doesn't exist")
-//     : "") || console.log(data);
-// });
+fs.readFile(file_name, "utf-8", (err, data) => {
+  (err && err.message.includes("no such file or directory")
+    ? !console.err("file doesn't exist")
+    : "") || console.log(data);
+});
 
 //^ note: console.log doesn't return a value, returns undefined
 
-// fs.readFile(file_name, "utf-8", (err, data) => {
-//   if (err && err.message.includes("no such file or directory")) {
-//     console.error("file doesn't exist");
-//     return; // Prevent further execution
-//   }
-//   console.log(data);
-// });
+fs.readFile(file_name, "utf-8", (err, data) => {
+  if (err && err.message.includes("no such file or directory")) {
+    console.error("file doesn't exist");
+    return; // Prevent further execution
+  }
+  console.log(data);
+});
 
 //*========================================================================================================
 
@@ -59,52 +59,52 @@ const source = "costumersData.txt";
 
 const destination = "./copy/customers.txt";
 
-// fs.copyFile(source, destination, (err) => {
-//   if (err) console.error(err.message);
-//   else console.log("file is copied");
-// });
+fs.copyFile(source, destination, (err) => {
+  if (err) console.error(err.message);
+  else console.log("file is copied");
+});
 //*========================================================================================================
 
 //& Directories
 
-// (function () {
-//   const source = "costumersData.txt";
+(function () {
+  const source = "costumersData.txt";
 
-//   const destination = "./copy/customers.txt";
-//   const dir = "./copy";
+  const destination = "./copy/customers.txt";
+  const dir = "./copy";
 
-//   async function copy() {
-//     try {
-//       //* 1) read the directory
-//       let files = await fs.promises.readdir(dir);
-//       console.log(files);
-//     } catch (err) {
-//       if (err && err.message.includes("no such file or directory")) {
-//         //* 2) if directory not existed
-//         try {
-//           //* 3) make directory
-//           await fs.promises.mkdir(dir);
-//           console.log("directory is created");
-//         } catch (mkdir_err) {
-//           console.error(mkdir_err);
-//           process.exit(1);
-//         }
-//       }
-//     }
+  async function copy() {
+    try {
+      //* 1) read the directory
+      let files = await fs.promises.readdir(dir);
+      console.log(files);
+    } catch (err) {
+      if (err && err.message.includes("no such file or directory")) {
+        //* 2) if directory not existed
+        try {
+          //* 3) make directory
+          await fs.promises.mkdir(dir);
+          console.log("directory is created");
+        } catch (mkdir_err) {
+          console.error(mkdir_err);
+          process.exit(1);
+        }
+      }
+    }
 
-//     console.log("start copying...");
+    console.log("start copying...");
 
-//     try {
-//       await fs.promises.copyFile(source, destination);
-//       console.log("file is copied");
-//     } catch (err) {
-//       console.error(err.message);
-//     }
-//   }
+    try {
+      await fs.promises.copyFile(source, destination);
+      console.log("file is copied");
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
-//   copy();
-// })();
-
+  copy();
+})();
+//*===============================================================================
 (function () {
   const source = "costumersData.txt";
   const destination = "./copy/customers.txt";
