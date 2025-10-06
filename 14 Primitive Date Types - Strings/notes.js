@@ -2,9 +2,22 @@
 
 //^ reading list
 
-//* any string is encoded as a binary based on a system which is UTF-16
+//* string depends on unicode version UTF-16 system
+
+//* UTF is the most common string encoding system
+
+//* UTF is the international standard to represent all languages in computer
+//* UTF is founded in 1988
+//* there are three standards for the unicode (utf -8 , UTF-16, UTF -32)
+
+//* any string is encoded as a binary to be stored in the computer
+//* based on a system which is UTF-16
 
 //* string is founded in 1988
+
+//^ note:
+//* smallest unit in the memory is 1 bit
+//* but bit can't be used alone, minimum unit to be used is Byte (8 bit)
 
 //* UTF-16 system represents a single character in 16 bit (2 bytes)
 //* so to store one character in the memory we need 2 bytes
@@ -13,23 +26,42 @@
 //* ask chatgpt unicode code point
 
 //* different representations of (د) in hexadecimal (8.png)
+//* one element in hexadecimal is 4 bits
+//* Hex: 062F, so 0: 4 bits , 6: 4 bits. 06: 8 bit === 1 Byte
+//* so 062F is 2 byte
 //? different forms of hexadecimal:
 //* U+062f
 //* 0x062f
 //* \u062f
 
-//* official name of unicode is code point
+//? There are different number systems in computer:
+//* 1- Decimal : system which human understands
+//* 2- Binary: system which data stored in computer
+//* 3- Hexadecimal and octa (helper or auxiliary systems)
 
-//* Most programming languages are based on utf - 16
+//* official name of one code in unicode is code point
 
-//* utf -32 : single character is 32 bit
-//* utf -8 : single character is 8 bit
+//~ Most programming languages are based on utf-16
 
-//* utf -32: any character is stored in the memory as 32 bit
+//* utf-32 : single character is 32 bit
+//* utf-8 : single character is 8 bit
+
+//* utf-32: any character is stored in the memory as 32 bit
+
+//* utf-32 or utf -16 or utf-8, all of them are able to store all the characters
+
+//* utf-8: store the character in memory starts from 8 bit till 32 bit
+//* means the character could be stored as one byte or two byte or three bytes or four bytes
+
+//* utf-16: store the character in memory starts from 16 bit till 32 bit
+//* character in this system, is stored in two bytes or four bytes
+
+//* utf-32: always store character as 32 bit only (4 bytes)
 
 //* every single emojis and egyptian hieroglyph stored as two characters
 
-//* UTF-16 surrogate pairs: represent the character that is stored as two  (two code points)
+//? UTF-16 surrogate pairs:
+//* represent the character that is stored as two  (two code points)
 //* such as Music symbol (🎼)
 //*=====================================================================================
 //! 37 – Strings – important functions – part 01

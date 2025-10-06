@@ -84,7 +84,9 @@
 
 // Tagged Values: V8 uses tagged pointers to differentiate between immediate values (like SMIs) and pointers to heap objects, providing efficient type checking and memory management.
 
-// Stack vs. Heap: Remember that the call stack holds function call frames (local variables, return addresses, etc.), whereas most complex data structures and objects reside in the heap.
+//? Stack vs. Heap:
+//* Remember that the call stack holds function call frames (local variables, return addresses, etc.),
+//* whereas most complex data structures and objects reside in the heap.
 
 // Optimizations: The SMI optimization is a key performance feature in V8, reducing the overhead of memory allocation for common integer values.
 
