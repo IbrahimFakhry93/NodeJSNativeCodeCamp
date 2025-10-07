@@ -68,7 +68,7 @@ per2.display_name(); //* Ibrahim Bebo
 
 //? Abstraction:
 
-//* show only necessary data nad methods to external world(ex.users) and hide the rest
+//* show only necessary data and methods to external world(ex.users) and hide the rest
 //* isolate the external world of the implementation of the data and methods inside the class
 
 //~ abstraction is: (hide details + isolate implementation) of the external world
@@ -128,7 +128,7 @@ per2.display_name(); //* Ibrahim Bebo
   let per = new Person("Almando", "Petro");
 
   console.log(per.full_name);
-  console.log(per.secret); //* undefined because it/s provide
+  console.log(per.secret); //* undefined because it's provided
   console.log(per.getSecret); ///* we can read private property by getter function
 
   per.secret = "new val";

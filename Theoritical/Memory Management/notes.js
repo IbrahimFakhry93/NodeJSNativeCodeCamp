@@ -1,5 +1,8 @@
 //! 53 – Memory Management – Stack and Heap
 
+//^ note:
+//* Watch Data & Memory, DataTypes & Memory
+
 //* V8 Engine is a program is built with C++ compiler
 
 //* Memory management by V8 engine
@@ -44,17 +47,24 @@
 //* even if there is a very small float number is stored in heap
 
 //* Javascript doesn't deal with the memory
-//* Javascript engine deals with the memory
+//* there are no memory management in js standard(ecma script)
+
+//* so the Javascript engine (ex. V8) is the one who deals with the memory
+//* memory management is different among different js engine
 
 //? Memory allocations:
 //?  تخصيص الذاكرة وتقسيمها
 
 //* V8 request memory from OS
 //* OS is completely in control of the computer memory
-//* OS in collaboration with CPU's MMU (Memory management unit) allocate block of the memory for V8
-//* V8 creates memory format (memory division) for this allocated block of the memory
+//* OS in collaboration with CPU's MMU (Memory Management Unit) allocate block of the memory for V8
+//* OS responds to V8 with virtual memory addresses not the physical address that the OS requests (allocates) from the memory
 
 //* any program on modern computer works with the concept of virtual memory
+//* You will know more about virtual memory when you study about operating system
+
+//* V8 creates memory format (memory division) for this allocated block of the memory
+//* in the following session you will know about this memory division (memory format)
 
 //*============================================================================
 
@@ -77,12 +87,15 @@
 
 //? Clarification of the Original Comments
 //* The statement "in V8 engine, all data types are stored in heap" is an oversimplification.
-//* While most objects and non-SMI numbers are indeed on the heap, SMIs are stored in a more efficient inline (immediate) format.
+//* While most objects and non-SMI numbers are indeed on the heap,
+//* SMIs are stored in a more efficient inline (immediate) format.
 //* Similarly, the claim "some small integers are stored in stack" is misleading –
 //* small integers (SMIs) are embedded in the pointer itself rather than being stored as distinct heap objects.
-//* Local variables (including SMIs) may reside in registers or on the stack during function execution, but their representation differs from heap-allocated objects.
+//* Local variables (including SMIs) may reside in registers or on the stack during function execution,
+//* but their representation differs from heap-allocated objects.
 
-// Tagged Values: V8 uses tagged pointers to differentiate between immediate values (like SMIs) and pointers to heap objects, providing efficient type checking and memory management.
+//* Tagged Values:
+//* V8 uses tagged pointers to differentiate between immediate values (like SMIs) and pointers to heap objects, providing efficient type checking and memory management.
 
 //? Stack vs. Heap:
 //* Remember that the call stack holds function call frames (local variables, return addresses, etc.),

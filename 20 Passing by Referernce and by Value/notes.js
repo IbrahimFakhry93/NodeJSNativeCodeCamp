@@ -1,11 +1,14 @@
 //! 58 – Passing by Reference – Passing by Value
 
+//* Passing by Reference – Passing by Value are two important concepts in dealing with variables
+
 //& V8 and Memory Handling in Node.js
 
 //? JavaScript Value Representation in V8
 //* V8 uses a tagging system to represent JavaScript values along with type information.
 //* Small integers (SMIs) are encoded directly within the pointer, meaning they do not need separate heap storage.
-//* For values like floating-point numbers or large integers that cannot be represented as SMIs, V8 allocates a HeapNumber object on the heap.
+//* For values like floating-point numbers or large integers that cannot be represented as SMIs,
+//* V8 allocates a HeapNumber object on the heap.
 
 //? Example: let salary = 2150.5;
 //* Since 2150.5 is a floating-point number and cannot be stored as an SMI, V8 creates a HeapNumber object on the heap.
@@ -17,8 +20,10 @@
 //* V8 Developer Documentation: https://v8.dev/docs
 
 //? Conclusion
-//* The statement "the decimal value of a variable such as let salary = 2150.5; is stored in the heap and its address is on the stack" is essentially correct.
-//* In V8, non-SMI numbers (like 2150.5) are stored as (HeapNumber objects) in the heap, while their reference (address) is maintained on the stack.
+//* The statement "the decimal value of a variable such as let salary = 2150.5; is stored in the heap
+//* and its address is on the stack" is essentially correct.
+//* In V8, non-SMI numbers (like 2150.5) are stored as (HeapNumber objects) in the heap,
+//*  while their reference (address) is maintained on the stack.
 
 //^ watch the video and the slides
 
@@ -107,7 +112,7 @@ console.log(new_arr);
   //~ object copy (reference copy)
   let new_person = person;
   //* new_person and person will have same memory address
-  //* so there will be no two objects, only one object with two different addresses
+  //* so there will be no two objects, only one object with two different addresses (references)
   new_person.name = "new name";
 
   //^ note for string property mutation:
@@ -173,7 +178,8 @@ console.log(new_arr);
   //* first_string and second_string will have same address in heap memory
   //* that's why string is immutable
 
-  //* it's a decision by programming language creators to declare string variable which hold same value of other string variable
+  //* it's a decision by programming language creators
+  //* to declare string variable which hold same value of other string variable
   //* the two strings variable will have same address in heap
 })();
 
@@ -187,63 +193,4 @@ console.log(new_arr);
 
   let new_person = { ...person };
   new_person.name = "new name";
-})();
-
-//!=====================================================================================================================================================================
-
-//! 59 – Shallow Copy – Deep Copy
-
-//& Shallow Copy
-(function () {
-  //~ level 1
-  let person = {
-    name: "Ibrahim",
-    year: 1998,
-
-    //* nested object
-    //~ level 2
-    class: {
-      id: 1,
-      subject: "math",
-    },
-
-    grades: [10, 20, 30],
-  };
-
-  let newPerson = { ...person }; //* spread operator provides shallow copy so only level 1 will be independent
-  newPerson.name = "ahmed";
-  newPerson.class.subject = "Biochemstry";
-  newPerson.grades[0] = 200;
-  newPerson.grades[1] = 300;
-  newPerson.grades[3] = 450;
-  console.log(person);
-  console.log(newPerson);
-})();
-
-//^======================================
-//& deep Copy
-(function () {
-  //~ level 1
-  let person = {
-    name: "Ibrahim",
-    year: 1998,
-
-    //* nested object
-    //~ level 2
-    class: {
-      id: 1,
-      subject: "math",
-    },
-
-    grades: [10, 20, 30],
-  };
-
-  let newPerson = structuredClone(person); //* deep copy: all levels will be independent
-  newPerson.name = "ahmed";
-  newPerson.class.subject = "Biochemstry";
-  newPerson.grades[0] = 200;
-  newPerson.grades[1] = 300;
-  newPerson.grades[3] = 450;
-  console.log(person);
-  console.log(newPerson);
 })();
